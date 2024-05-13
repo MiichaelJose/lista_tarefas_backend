@@ -1,16 +1,33 @@
 {
-  "name": "lista-de-tarefas",
-  "version": "0.0.0",
-  "private": true,
+  "name": "task",
+  "version": "1.0.0",
+  "description": "project",
+  "main": "server.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "test.js",
+    
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "build": "tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiichaelJose/lista-de-tarefas.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "michael",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MiichaelJose/lista-de-tarefas/issues"
+  },
+  "homepage": "https://github.com/MiichaelJose/lista-de-tarefas#readme",
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
   }
 }
