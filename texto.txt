@@ -5,3 +5,6 @@ npm install typescript --save-dev
 https://www.typescriptlang.org/download/
 
 https://dev.to/rogeriorioli/iniciando-um-projeto-nodejs-express-com-typescript-4bfl
+
+https://nodemon.io/
+
