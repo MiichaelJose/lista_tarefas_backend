@@ -2,13 +2,19 @@ import express from 'express'
 
 import router from './routes'
 
+import connectMongo  from './config/database.ts'
+
 const app = express();
 
-app.use(express.json())
-
-console.log(router);
-
-
-app.use(router)
-
-app.listen(3000, () => 'server running on port 3000')
+(async () => {
+    try {
+        await connectMongo();
+        console.log('Conexão com MongoDB estabelecida com sucesso');
+        
+        app.use(router);
+        
+        app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
+    } catch (error) {
+        console.error('Erro ao conectar ao MongoDB:', error);
+    }
+})();
