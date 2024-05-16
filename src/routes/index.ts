@@ -1,13 +1,9 @@
 import { Router } from "express"
 
+import { fetch } from "../controllers/taskController"
+
 const router = Router()
 
-router.get('/', (req, res) => {
-    res.send('hello world')
-})
-
-router.get('/user', (req, res) => {
-    res.send('usuario')
-})
+router.get('/', fetch)
 
 export default router;

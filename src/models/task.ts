@@ -1,50 +1,16 @@
-// task.model.js
 
-class Task {
-    title: string
-    description: string
-    dueDate: string
-    completed: boolean
+import mongoose from "mongoose";
 
-    constructor(title:string, description:string, dueDate:string, completed:boolean = false) {
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.completed = completed;
+// Define the schema for the user entity
+const taskSchema = new mongoose.Schema({
+    title: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String,
+      default: ''
     }
-
-    // Métodos para acessar e modificar os dados
-    getTitle() {
-        return this.title;
-    }
-
-    setTitle(title) {
-        this.title = title;
-    }
-
-    getDescription() {
-        return this.description;
-    }
-
-    setDescription(description) {
-        this.description = description;
-    }
-
-    getDueDate() {
-        return this.dueDate;
-    }
-
-    setDueDate(dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    isCompleted() {
-        return this.completed;
-    }
-
-    setCompleted(completed) {
-        this.completed = completed;
-    }
-}
-
-module.exports = Task;
+  });
+  
+  export default mongoose.model("tasks", taskSchema);
