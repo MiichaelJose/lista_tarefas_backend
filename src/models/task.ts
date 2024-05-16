@@ -11,6 +11,6 @@ const taskSchema = new mongoose.Schema({
       type: String,
       default: ''
     }
-  });
+});
   
 export default mongoose.model("tasks", taskSchema);
