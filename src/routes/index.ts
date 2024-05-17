@@ -1,9 +1,20 @@
 import { Router } from "express"
 
-import { fetch } from "../controllers/taskController"
+import { fetchTk, createTk } from "../controllers/taskController"
+import { fetchWs, create, change, deleted } from "../controllers/workspaceController"
+
 
 const router = Router()
 
-router.get('/', fetch)
+router.get('/task/get', fetchTk)
+router.post('/task/post', createTk)
+
+router.get('/workspace/get', fetchWs)
+
+router.post('/workspace/post', create)
+
+router.put('/workspace/put', change)
+
+router.delete('/workspace/delete', deleted)
 
 export default router;

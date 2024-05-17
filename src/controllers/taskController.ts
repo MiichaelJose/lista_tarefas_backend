@@ -1,22 +1,26 @@
 import Task from "../models/task";
 
-
-export const fetch = async (req:any, res:any)=>{
-    console.log("entrou");
-
+export const fetchTk = async (req:any, res:any)=>{
     try {
-        console.log("entrou");
-
-        // Find all users in the database
         const tasks = await Task.find();
-        // If no users are found, send a 404 error response
         
-        // Send a success response with the fetched users data
         res.status(200).json(tasks);
     } catch (error) {
-        console.log("entrou");
+        res.status(500).json({error : " Internal Server Error. "})
+    }
+}
 
-        // Handle any errors and send an internal server error response
+export const createTk = async (req:any, res:any)=>{
+    const workspaceId = req.body.customerId
+
+    try {
+
+        const tasks = new Task(req.body);
+
+        const savedTask = await tasks.save()
+        
+        res.status(200).json(savedTask);
+    } catch (error) {
         res.status(500).json({error : " Internal Server Error. "})
     }
 }

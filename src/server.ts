@@ -4,7 +4,11 @@ import router from './routes'
 
 import mongoose from "mongoose";
 
+import bodyParser from "body-parser";
+
 const app = express();
+
+app.use(bodyParser.json());
 
 mongoose
 .connect("mongodb://localhost:27017/lista-de-tarefas")
@@ -17,18 +21,3 @@ mongoose
 .catch((error) => console.log(error));
 
 app.use(router);
-/*
-(async () => {
-    try {
-        //await connectMongo();
-
-        
-        console.log('Conexão com MongoDB estabelecida com sucesso');
-        
-        
-        
-        app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
-    } catch (error) {
-        console.error('Erro ao conectar ao MongoDB:', error);
-    }
-})();*/

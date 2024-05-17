@@ -1,8 +1,7 @@
-
 import mongoose from "mongoose";
 
-// Define the schema for the user entity
 const taskSchema = new mongoose.Schema({
+    customerId:mongoose.Schema.Types.ObjectId,
     title: {
       type: String,
       required: true
@@ -10,7 +9,9 @@ const taskSchema = new mongoose.Schema({
     description: {
       type: String,
       default: ''
-    }
+    },
+    created_at: { type: Date, default: Date.now },
+    updated_at: { type: Date, default: Date.now }
 });
   
 export default mongoose.model("tasks", taskSchema);
