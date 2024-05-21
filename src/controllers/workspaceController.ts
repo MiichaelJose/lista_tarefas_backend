@@ -1,8 +1,11 @@
 import Workspace from "../models/workspace";
+import WorkspaceService from "../services/workspaceService";
 
 export const fetchWs = async (req:any, res:any) => {
     try {
-        const workspaces = await Workspace.find();
+        console.log(req);
+        
+        const workspaces = await new WorkspaceService().fetchWorkspace(req.workspaceID.id);
         
         res.status(200).json(workspaces);
     } catch (error) {
