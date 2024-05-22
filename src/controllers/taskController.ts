@@ -1,8 +1,8 @@
-import Task from "../models/task";
+import TaskService from "../services/taskService";
 
-export const fetchTk = async (req:any, res:any)=>{
+export const fetchTasks = async (req:any, res:any)=>{
     try {
-        const tasks = await Task.find();
+        const tasks = await new TaskService().fetchAllTasks();
         
         res.status(200).json(tasks);
     } catch (error) {
@@ -10,17 +10,39 @@ export const fetchTk = async (req:any, res:any)=>{
     }
 }
 
-export const createTk = async (req:any, res:any)=>{
-    const workspaceId = req.body.customerId
-
+export const fetchOneTask = async (req:any, res:any)=>{
     try {
-
-        const tasks = new Task(req.body);
-
-        const savedTask = await tasks.save()
+        const task = await new TaskService().fetchOneTask(req.params.id);
         
-        res.status(200).json(savedTask);
+        res.status(200).json(task);
     } catch (error) {
         res.status(500).json({error : " Internal Server Error. "})
     }
 }
+
+export const createTask = async (req:any, res:any)=>{
+    try {
+        const task = await new TaskService().createTask(req.body);
+        res.status(200).json(task);
+    } catch (error) {
+        res.status(500).json({error : " Internal Server Error. "})
+    }
+}
+
+export const changeTask = async (req: any, res: any) => {
+    try {
+        const task = await new TaskService().updateTask( req.params.id, req.body.name );
+        res.status(200).json(task);
+    } catch (error) {
+        res.status(500).json({error : " Internal Server Error. "})
+    }
+} 
+
+export const deleteTask = async (req: any, res: any) => {
+    try {
+        const savedTask = await new TaskService().deleteTask(req.params.id)
+        res.status(200).json(savedTask);
+    } catch (error) {
+        res.status(500).json({error : " Internal Server Error. "})
+    }
+} 
