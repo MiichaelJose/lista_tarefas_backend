@@ -1,12 +1,13 @@
 import { Router } from "express"
 
-import { fetchOneTask, fetchTasks, createTask, changeTask, deleteTask } from "../controllers/taskController"
+import { fetchOneTask, fetchOneTaskWithWorkspace, fetchTasks, createTask, changeTask, deleteTask } from "../controllers/taskController"
 import { fetchOneWorkspace, fetchWorkspaces, createWorkspace, changeWorkspace, deleteWorkspace } from "../controllers/workspaceController"
 
 
 const router = Router()
 
 router.get('/task/one/:id', fetchOneTask)
+router.get('/task/one-with-workspace/:id', fetchOneTaskWithWorkspace)
 router.get('/task/all/',fetchTasks)
 router.post('/task', createTask)
 router.put('/task/put/:id', changeTask)

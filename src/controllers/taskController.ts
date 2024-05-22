@@ -10,6 +10,17 @@ export const fetchTasks = async (req:any, res:any)=>{
     }
 }
 
+export const fetchOneTaskWithWorkspace = async (req:any, res:any)=>{
+    try {
+        const task = await new TaskService().fetchOneTaskWithWorkspace(req.params.id);
+        
+        res.status(200).json(task);
+    } catch (error) {
+        res.status(500).json({error : " Internal Server Error. "})
+    }
+}
+
+
 export const fetchOneTask = async (req:any, res:any)=>{
     try {
         const task = await new TaskService().fetchOneTask(req.params.id);

@@ -1,24 +1,28 @@
 import Task from "../models/task.ts"
 
 class TaskService {
-    async fetchOneTask(id:any) {
+    async fetchOneTask(id: any) {
         return await Task.findById(id)
+    }
+
+    async fetchOneTaskWithWorkspace(id: any) {
+        return await Task.findById(id).populate('workspaceId');
     }
 
     async fetchAllTasks() {
         return await Task.find()
     }
     
-    async createTask(body:any) {
+    async createTask(body: any) {
         const task = new Task(body)
         return await task.save()
     }
 
-    async updateTask(id:any, body:any) {
+    async updateTask(id: any, body: any) {
         return await Task.findOneAndUpdate({ _id:id }, { $set:body }, { new: true, runValidators: true })
     }
 
-    async deleteTask(id:any) {
+    async deleteTask(id: any) {
         return await Task.deleteOne({ _id:id })
     }
 }
