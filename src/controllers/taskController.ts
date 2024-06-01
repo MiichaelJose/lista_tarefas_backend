@@ -20,7 +20,6 @@ export const fetchOneTaskWithWorkspace = async (req:any, res:any)=>{
     }
 }
 
-
 export const fetchOneTask = async (req:any, res:any)=>{
     try {
         const task = await new TaskService().fetchOneTask(req.params.id);
