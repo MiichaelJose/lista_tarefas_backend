@@ -8,27 +8,31 @@ export const auth = async (req: any, res: any, next: any) => {
     }
 
     if(header == undefined) {
-        res.status(403).json(msg)
         console.log("Token não encontrado!");
+        res.status(403).json(msg)
     } else {
         console.log("Token encontrado!");
-        verifyRequest(header)
-        // permite realizar requisão para proxima rota de qualquer method
-        next()
+
+        const response = await verifyRequest(header);
+      
+        if(response?.name === "JsonWebTokenError") {
+            res.status(404).json(msg)
+        }else {
+            // permite realizar requisão para proxima rota de qualquer method
+            next()
+        }
     }
 }
-
+// verificar token utilizando microserviço 
 const verifyRequest = async (authorization_header: any) => {
     const { url, headers } = {
         url: 'http://localhost:3001/verify',
         headers: {"Authorization": authorization_header}
     }
 
-    await axios.get(url, { headers })
-    .then(response => {
-        console.log('Resposta do microserviço:', response.data);
-    })
-    .catch(error => {
-        console.error('Erro ao consumir o microserviço:', error);
-    });
+    const response = await axios.get(url, { headers })
+    
+    console.log('Resposta do microserviço:', response.data?.name);
+        
+    return response.data;
 }
