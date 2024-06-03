@@ -1,10 +1,13 @@
 import { Router } from "express"
 
+import { auth } from "../middlewares/auth"
+
 import { fetchOneTask, fetchOneTaskWithWorkspace, fetchTasks, createTask, changeTask, deleteTask } from "../controllers/taskController"
 import { fetchOneWorkspace, fetchWorkspaces, createWorkspace, changeWorkspace, deleteWorkspace } from "../controllers/workspaceController"
 
-
 const router = Router()
+// middleware de authentication
+router.all("/*", auth)
 
 router.get('/task/one/:id', fetchOneTask)
 router.get('/task/one-with-workspace/:id', fetchOneTaskWithWorkspace)
