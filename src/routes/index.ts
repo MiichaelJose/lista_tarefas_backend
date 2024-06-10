@@ -7,7 +7,7 @@ import { fetchOneWorkspace, fetchWorkspaces, createWorkspace, changeWorkspace, d
 
 const router = Router()
 // middleware de authentication
-router.all("/*", auth)
+//router.all("/*", auth)
 
 router.get('/task/one/:id', fetchOneTask)
 router.get('/task/one-with-workspace/:id', fetchOneTaskWithWorkspace)
