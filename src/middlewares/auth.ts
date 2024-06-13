@@ -26,7 +26,7 @@ export const auth = async (req: any, res: any, next: any) => {
 // verificar token utilizando microserviço 
 const verifyRequest = async (authorization_header: any) => {
     const { url, headers } = {
-        url: 'http://localhost:3001/verify',
+        url: 'http://localhost:3000/service-auth/verify',
         headers: {"Authorization": authorization_header}
     }
 

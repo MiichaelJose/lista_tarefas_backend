@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 
 const app = express();
+const PORT = 3002
 
 app.use(bodyParser.json());
 
@@ -15,8 +16,8 @@ mongoose
 .then(() => {
     console.log("Database connected successfully.");
     
-    app.listen(3002, () => {
-      console.log(`Server is running on port : 3000 `);
+    app.listen(PORT, () => {
+      console.log(`Server is running on port : ${PORT} `);
     });
 })
 .catch((error) => console.log(error));
