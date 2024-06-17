@@ -24,4 +24,4 @@ class WorkspaceService {
     }
 }
 
-export default WorkspaceService
+export default WorkspaceService;
