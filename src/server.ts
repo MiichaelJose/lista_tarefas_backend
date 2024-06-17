@@ -6,18 +6,21 @@ import mongoose from "mongoose";
 
 import bodyParser from "body-parser";
 
+import "dotenv/config";
+
 const app = express();
-const PORT = 3002
+
+const ENV: any = process.env;
 
 app.use(bodyParser.json());
 
 mongoose
-.connect("mongodb://localhost:27017/lista-de-tarefas")
+.connect(ENV.HOST_DATABASE)
 .then(() => {
     console.log("Database connected successfully.");
     
-    app.listen(PORT, () => {
-      console.log(`Server is running on port : ${PORT} `);
+    app.listen(ENV.PORT, () => {
+      console.log(`Server is running on port : ${ENV.PORT} `);
     });
 })
 .catch((error) => console.log(error));
