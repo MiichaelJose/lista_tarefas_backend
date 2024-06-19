@@ -1,12 +1,12 @@
-import express from "express";
+import express from 'express';
 
-import router from "./routes";
+import router from './routes';
 
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-import bodyParser from "body-parser";
+import bodyParser from 'body-parser';
 
-import "dotenv/config";
+import 'dotenv/config';
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 mongoose
     .connect(ENV.HOST_DATABASE)
     .then(() => {
-        console.log("Database connected successfully.");
+        console.log('Database connected successfully.');
 
         app.listen(ENV.PORT, () => {
             console.log(`Server is running on port : ${ENV.PORT} `);

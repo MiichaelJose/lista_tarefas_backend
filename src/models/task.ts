@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const taskSchema = new mongoose.Schema({
     title: {
@@ -7,15 +7,15 @@ const taskSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        default: "",
+        default: '',
     },
     workspaceId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "workspaces",
+        ref: 'workspaces',
         required: true,
     },
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("tasks", taskSchema);
+export default mongoose.model('tasks', taskSchema);

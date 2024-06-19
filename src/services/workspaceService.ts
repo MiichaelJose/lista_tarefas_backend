@@ -1,4 +1,4 @@
-import Workspace from "../models/workspace.ts";
+import Workspace from '../models/workspace.ts';
 
 class WorkspaceService {
     async fetchWorkspace(id: any) {
@@ -28,4 +28,4 @@ class WorkspaceService {
     }
 }
 
-export default WorkspaceService
+export default WorkspaceService;

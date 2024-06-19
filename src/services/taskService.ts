@@ -1,24 +1,24 @@
-import Task from "../models/task.ts";
+import Task from '../models/task.ts';
 
 class TaskService {
-    async fetchOneTask(id: number) {
+    async fetchOneTask(id: any) {
         return await Task.findById(id);
     }
 
-    async fetchOneTaskWithWorkspace(id: number) {
-        return await Task.findById(id).populate("workspaceId");
+    async fetchOneTaskWithWorkspace(id: any) {
+        return await Task.findById(id).populate('workspaceId');
     }
 
     async fetchAllTasks() {
         return await Task.find();
     }
 
-    async createTask(body: JSON) {
+    async createTask(body: any) {
         const task = new Task(body);
         return await task.save();
     }
 
-    async updateTask(id: number, body: any) {
+    async updateTask(id: any, body: any) {
         return await Task.findOneAndUpdate(
             { _id: id },
             { $set: body },
@@ -26,7 +26,7 @@ class TaskService {
         );
     }
 
-    async deleteTask(id: number) {
+    async deleteTask(id: any) {
         return await Task.deleteOne({ _id: id });
     }
 }

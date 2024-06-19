@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const workspaceSchema = new mongoose.Schema({
     name: {
@@ -9,4 +9,4 @@ const workspaceSchema = new mongoose.Schema({
     updated_at: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("workspaces", workspaceSchema);
+export default mongoose.model('workspaces', workspaceSchema);
