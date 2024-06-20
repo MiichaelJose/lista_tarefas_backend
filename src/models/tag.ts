@@ -20,4 +20,4 @@ const tagSchema = new mongoose.Schema({
     updated_at: { type: Date, default: Date.now },
 });
 
-export default mongoose.model('tag', tagSchema);
+export default mongoose.model('tags', tagSchema);

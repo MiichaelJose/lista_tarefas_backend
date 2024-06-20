@@ -16,9 +16,12 @@ class TaskService {
     }
 
     async fetchOneTaskWithWorkspace(id: any) {
-        const task = Task.findById(id).populate('workspaceId').exec();
+        const task = Task.findById(id)
+        .populate({ path: 'workspaceId', select: ['-_id', '-__v'] })
+        .populate({ path: 'tagId', select: ['name', 'txt_color_hex'] })
+        .exec();
 
-        task.then((_err: any, resp: any) => {
+        task.then(resp => {
             console.log(resp);
         })
         
