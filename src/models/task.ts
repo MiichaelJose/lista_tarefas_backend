@@ -13,7 +13,7 @@ const taskSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: "active"
+        default: 'active',
     },
     title: {
         type: String,
@@ -24,10 +24,10 @@ const taskSchema = new mongoose.Schema({
         type: String,
     },
     initial_at: {
-        type: Date
+        type: Date,
     },
     ended_at: {
-        type: Date
+        type: Date,
     },
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },

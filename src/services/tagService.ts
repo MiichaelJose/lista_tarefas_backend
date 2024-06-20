@@ -1,4 +1,4 @@
-import Tag from "../models/tag.ts";
+import Tag from '../models/tag.ts';
 
 interface Tag {
     name: string;
@@ -10,12 +10,12 @@ interface Tag {
 class TagService {
     async fetchAllTags() {
         return await Tag.find();
-    }    
+    }
 
     async createTag(body: Tag) {
         const tag = new Tag(body);
         return await tag.save();
-    }    
+    }
 }
 
 export default TagService;
