@@ -1,24 +1,40 @@
 import Task from '../models/task.ts';
 
+interface Task {
+    status: string;
+    title: string;
+    description: string;
+    workspaceId: string;
+    tagId: string;
+    initial_at: Date;
+    ended_at: Date;
+}
+
 class TaskService {
     async fetchOneTask(id: any) {
         return await Task.findById(id);
     }
 
     async fetchOneTaskWithWorkspace(id: any) {
-        return await Task.findById(id).populate('workspaceId');
+        const task = Task.findById(id).populate('workspaceId').exec();
+
+        task.then((_err: any, resp: any) => {
+            console.log(resp);
+        })
+        
+        return await task;
     }
 
     async fetchAllTasks() {
         return await Task.find();
     }
 
-    async createTask(body: any) {
+    async createTask(body: Task) {
         const task = new Task(body);
         return await task.save();
     }
 
-    async updateTask(id: any, body: any) {
+    async updateTask(id: any, body: Task) {
         return await Task.findOneAndUpdate(
             { _id: id },
             { $set: body },
