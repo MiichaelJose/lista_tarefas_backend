@@ -1,15 +1,5 @@
 import Task from '../models/task.ts';
 
-interface Task {
-    status: string;
-    title: string;
-    description: string;
-    workspaceId: string;
-    tagId: string;
-    initial_at: Date;
-    ended_at: Date;
-}
-
 class TaskService {
     async fetchOneTask(id: any) {
         return await Task.findById(id);
@@ -32,12 +22,12 @@ class TaskService {
         return await Task.find();
     }
 
-    async createTask(body: Task) {
+    async createTask(body: any) {
         const task = new Task(body);
         return await task.save();
     }
 
-    async updateTask(id: any, body: Task) {
+    async updateTask(id: any, body: any) {
         return await Task.findOneAndUpdate(
             { _id: id },
             { $set: body },
