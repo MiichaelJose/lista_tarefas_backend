@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 import TaskService from '../services/taskService';
+//import NotificationService from '../services/notificationService';
 
 class TaskController {
     public fetchTasks = async (req: Request, res: Response) => {
+
         try {
             const tasks = await new TaskService().fetchAllTasks();
 
@@ -35,10 +37,16 @@ class TaskController {
     };
 
     public createTask = async (req: Request, res: Response) => {
+        const body = req.body;
         try {
-            const task = await new TaskService().createTask(req.body);
+            const task = await new TaskService().createTask(body);
+
+            //new NotificationService().createNotification({status:'pendente', people_notify: body.people_task, task_notify: body._id});
+
             res.status(200).json(task);
         } catch (error) {
+            console.log(error);
+            
             res.status(404).json({ error: ' Internal Server Error. ' });
         }
     };
