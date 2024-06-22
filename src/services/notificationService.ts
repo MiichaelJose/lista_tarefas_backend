@@ -14,3 +14,5 @@ class NotificationService {
         return await notification.save();
     }
 }
+
+export default NotificationService;
