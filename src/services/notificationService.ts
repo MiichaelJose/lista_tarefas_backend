@@ -1,4 +1,4 @@
-import Notification from "../models/notification";
+import Notification from '../models/notification';
 
 class NotificationService {
     async fetchOneNotification(id: any) {

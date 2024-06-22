@@ -1,9 +1,17 @@
 import mongoose from 'mongoose';
 
 const taskSchema = new mongoose.Schema({
-    workspaceId: { type: mongoose.Schema.Types.ObjectId, ref: 'workspaces', required: true },
-    tagId: { type: mongoose.Schema.Types.ObjectId, ref: 'tags', required: true },
-    people_task: [ { _id: String, name: String } ],
+    workspaceId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'workspaces',
+        required: true,
+    },
+    tagId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'tags',
+        required: true,
+    },
+    people_task: [{ _id: String, name: String }],
     status: { type: String, default: 'active' },
     title: { type: String, required: true },
     description: { type: String, required: true },
