@@ -1,30 +1,30 @@
-import Workspace from '../schemas/workspace.ts';
+import WorkspaceRepository from '../repositorys/workspaceRepository';
 
 class WorkspaceService {
-    async fetchWorkspace(id: any) {
-        return await Workspace.findById(id);
+    private workspaceRepository: WorkspaceRepository;
+
+    constructor() {
+        this.workspaceRepository = new WorkspaceRepository();
     }
 
-    async fetchAllWorkspace() {
-        return await Workspace.find();
+    public async fetchWorkspace(id: any) {
+        return await this.workspaceRepository.fetchWorkspace(id);
     }
 
-    async createWorkspace(body: any) {
-        const workspace = new Workspace(body);
-        return await workspace.save();
+    public async fetchAllWorkspace() {
+        return await this.workspaceRepository.fetchAllWorkspace();
     }
 
-    async updateWorkspace(id: any, name: any) {
-        //alternativa { $set:boy }, { new: true, runValidators: true }
-        return await Workspace.findOneAndUpdate(
-            { _id: id },
-            { name: name },
-            { new: true }
-        );
+    public async createWorkspace(body: any) {
+        return await this.workspaceRepository.createWorkspace(body);
     }
 
-    async deleteWorkspace(id: any) {
-        return await Workspace.deleteOne({ _id: id });
+    public async updateWorkspace(id: any, name: any) {
+        return await this.workspaceRepository.updateWorkspace(id, name);
+    }
+
+    public async deleteWorkspace(id: any) {
+        return await this.workspaceRepository.deleteWorkspace(id);
     }
 }
 

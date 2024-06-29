@@ -28,6 +28,6 @@ router.post('/workspace', workspaceController.createWorkspace);
 router.put('/workspace/put/:id', workspaceController.changeWorkspace);
 router.delete('/workspace/:id', workspaceController.deleteWorkspace);
 
-router.use(verifyProxyHeader);
+//router.use(verifyProxyHeader);
 
 export default router;

@@ -1,20 +1,18 @@
-import Tag from '../schemas/tag.ts';
-
-interface Tag {
-    name: string;
-    image: string;
-    txt_color_hex: string;
-    bgd_color_hex: string;
-}
+import TagRepository from '../repositorys/tagRepository.ts';
 
 class TagService {
-    async fetchAllTags() {
-        return await Tag.find();
+    private tagRepository: TagRepository;
+
+    constructor() {
+        this.tagRepository = new TagRepository();
     }
 
-    async createTag(body: Tag) {
-        const tag = new Tag(body);
-        return await tag.save();
+    public async fetchAllTags() {
+        return await this.tagRepository.fetchAllTags();
+    }
+
+    public async createTag(body: any) {
+        return await this.tagRepository.createTag(body);
     }
 }
 

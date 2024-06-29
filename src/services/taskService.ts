@@ -1,28 +1,34 @@
 import TaskRepository from '../repositorys/taskRepository.ts';
 
 class TaskService {
-    async fetchOneTask(id: any) {
-        return await new TaskRepository().fetchOneTask(id);
+    private taskRepository: TaskRepository;
+
+    constructor() {
+        this.taskRepository = new TaskRepository();
     }
 
-    async fetchOneTaskWithWorkspace(id: any) {
+    public async fetchOneTask(id: any) {
+        return await this.taskRepository.fetchOneTask(id);
+    }
+
+    public async fetchOneTaskWithWorkspace(id: any) {
         const task = new TaskRepository().fetchOneTaskWithWorkspace(id)
         return await task;
     }
 
-    async fetchAllTasks() {
+    public async fetchAllTasks() {
         return await new TaskRepository().fetchAllTasks();
     }
 
-    async createTask(body: any) {
+    public async createTask(body: any) {
         return new TaskRepository().createTask(body);
     }
 
-    async updateTask(id: any, body: any) {
+    public async updateTask(id: any, body: any) {
         return await new TaskRepository().updateTask(id, body);
     }
 
-    async deleteTask(id: any) {
+    public async deleteTask(id: any) {
         return await new TaskRepository().deleteTask(id);
     }
 }
