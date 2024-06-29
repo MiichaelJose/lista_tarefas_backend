@@ -1,42 +1,29 @@
-import Task from '../models/task.ts';
+import TaskRepository from '../repositorys/taskRepository.ts';
 
 class TaskService {
     async fetchOneTask(id: any) {
-        return await Task.findById(id);
+        return await new TaskRepository().fetchOneTask(id);
     }
 
     async fetchOneTaskWithWorkspace(id: any) {
-        const task = Task.findById(id)
-            .populate({ path: 'workspaceId', select: ['-_id', '-__v'] })
-            .populate({ path: 'tagId', select: ['name', 'txt_color_hex'] })
-            .exec();
-
-        task.then((resp) => {
-            console.log(resp);
-        });
-
+        const task = new TaskRepository().fetchOneTaskWithWorkspace(id)
         return await task;
     }
 
     async fetchAllTasks() {
-        return await Task.find();
+        return await new TaskRepository().fetchAllTasks();
     }
 
     async createTask(body: any) {
-        const task = new Task(body);
-        return await task.save();
+        return new TaskRepository().createTask(body);
     }
 
     async updateTask(id: any, body: any) {
-        return await Task.findOneAndUpdate(
-            { _id: id },
-            { $set: body },
-            { new: true, runValidators: true }
-        );
+        return await new TaskRepository().updateTask(id, body);
     }
 
     async deleteTask(id: any) {
-        return await Task.deleteOne({ _id: id });
+        return await new TaskRepository().deleteTask(id);
     }
 }
 

@@ -1,4 +1,4 @@
-import Tag from '../models/tag.ts';
+import Tag from '../schemas/tag.ts';
 
 interface Tag {
     name: string;

@@ -1,4 +1,4 @@
-import Workspace from '../models/workspace.ts';
+import Workspace from '../schemas/workspace.ts';
 
 class WorkspaceService {
     async fetchWorkspace(id: any) {

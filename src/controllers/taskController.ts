@@ -27,11 +27,15 @@ class TaskController {
     };
 
     public fetchOneTask = async (req: Request, res: Response) => {
+        console.log("oi");
+        
         try {
             const task = await new TaskService().fetchOneTask(req.params.id);
 
             res.status(200).json(task);
         } catch (error) {
+            console.log(error);
+            
             res.status(500).json({ error: ' Internal Server Error. ' });
         }
     };
