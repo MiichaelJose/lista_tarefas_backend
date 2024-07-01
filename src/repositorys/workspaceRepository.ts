@@ -1,4 +1,4 @@
-import Workspace from "../schemas/workspace";
+import Workspace from '../schemas/workspace';
 
 class WorkspaceRepository {
     public async fetchWorkspace(id: any) {

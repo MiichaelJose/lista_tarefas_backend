@@ -25,12 +25,12 @@ app.get('/events', (req, res) => {
     res.write('data: Conexão estabelecida\n\n');
 
     console.log(res);
-    
+
     clients.push(res);
 
     // Remover o cliente da lista ao fechar a conexão
     req.on('close', () => {
-        clients = clients.filter(client => client !== res);
+        clients = clients.filter((client) => client !== res);
     });
 });
 
@@ -40,7 +40,7 @@ app.post('/notify', (req, res) => {
         message: req.body.message || 'Nova notificação do backend',
         timestamp: new Date(),
     };
-    clients.forEach(client => {
+    clients.forEach((client) => {
         client.write(`data: ${JSON.stringify(notification)}\n\n`);
     });
     res.status(200).send('Notificação enviada');

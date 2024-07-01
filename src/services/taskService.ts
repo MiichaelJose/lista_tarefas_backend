@@ -12,24 +12,23 @@ class TaskService {
     }
 
     public async fetchOneTaskWithWorkspace(id: any) {
-        const task = new TaskRepository().fetchOneTaskWithWorkspace(id)
-        return await task;
+        return await this.taskRepository.fetchOneTaskWithWorkspace(id);
     }
 
     public async fetchAllTasks() {
-        return await new TaskRepository().fetchAllTasks();
+        return await this.taskRepository.fetchAllTasks();
     }
 
     public async createTask(body: any) {
-        return new TaskRepository().createTask(body);
+        return await this.taskRepository.createTask(body);
     }
 
     public async updateTask(id: any, body: any) {
-        return await new TaskRepository().updateTask(id, body);
+        return await this.taskRepository.updateTask(id, body);
     }
 
     public async deleteTask(id: any) {
-        return await new TaskRepository().deleteTask(id);
+        return await this.taskRepository.deleteTask(id);
     }
 }
 

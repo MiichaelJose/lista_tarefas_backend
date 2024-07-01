@@ -1,4 +1,4 @@
-import Task from "../schemas/task.ts";
+import Task from '../schemas/task.ts';
 
 class TaskRepository {
     public async fetchOneTask(id: any) {

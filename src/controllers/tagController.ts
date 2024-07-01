@@ -2,9 +2,15 @@ import { Request, Response } from 'express';
 import TagService from '../services/tagService';
 
 class TagController {
-    public fetchTags = async (req: Request, res: Response) => {
+    private tagService: TagService;
+
+    constructor() {
+        this.tagService = new TagService();
+    }
+
+    fetchTags = async (req: Request, res: Response) => {
         try {
-            const tags = await new TagService().fetchAllTags();
+            const tags = await this.tagService.fetchAllTags();
 
             res.status(200).json(tags);
         } catch (error) {
@@ -12,14 +18,16 @@ class TagController {
         }
     };
 
-    public createTag = async (req: Request, res: Response) => {
+    public async createTag(req: Request, res: Response) {
         try {
-            const tag = await new TagService().createTag(req.body);
+            const body = req.body;
+
+            const tag = await this.tagService.createTag(body);
             res.status(200).json(tag);
         } catch (error) {
             res.status(404).json({ error: ' Internal Server Error. ' });
         }
-    };
+    }
 }
 
 export default TagController;

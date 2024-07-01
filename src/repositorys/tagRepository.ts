@@ -1,13 +1,20 @@
-import Tag from '../schemas/tag.ts';
+import Tag from '../models/tag;model.ts';
+import TagSchema from '../schemas/tag.ts';
 
 class TagRepository {
     public async fetchAllTags() {
-        return await Tag.find();
+        return await TagSchema.find();
     }
 
-    public async createTag(body: any) {
-        const tag = new Tag(body);
-        return await tag.save();
+    public async createTag(tag: Tag) {
+        try {
+            const otag = new TagSchema(tag);
+            return await otag.save();
+        } catch (error) {
+            console.log(error);
+
+            console.log(error);
+        }
     }
 }
 

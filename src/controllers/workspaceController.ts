@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import WorkspaceService from '../services/workspaceService';
 
 class WorkspaceController {
-    public fetchOneWorkspace = async (req: Request, res: Response) => {
+    public async fetchOneWorkspace(req: Request, res: Response) {
         try {
             const workspaces = await new WorkspaceService().fetchWorkspace(
                 req.params.id
@@ -11,18 +11,18 @@ class WorkspaceController {
         } catch (error) {
             res.status(500).json({ error: ' Internal Server Error. ' });
         }
-    };
+    }
 
-    public fetchWorkspaces = async (req: Request, res: Response) => {
+    public async fetchWorkspaces(req: Request, res: Response) {
         try {
             const workspaces = await new WorkspaceService().fetchAllWorkspace();
             res.status(200).json(workspaces);
         } catch (error) {
             res.status(500).json({ error: ' Internal Server Error. ' });
         }
-    };
+    }
 
-    public createWorkspace = async (req: Request, res: Response) => {
+    public async createWorkspace(req: Request, res: Response) {
         try {
             const workspace = await new WorkspaceService().createWorkspace(
                 req.body
@@ -31,9 +31,9 @@ class WorkspaceController {
         } catch (error) {
             res.status(500).json({ error: ' Internal Server Error. ' });
         }
-    };
+    }
 
-    public changeWorkspace = async (req: Request, res: Response) => {
+    public async changeWorkspace(req: Request, res: Response) {
         try {
             const workspace = await new WorkspaceService().updateWorkspace(
                 req.params.id,
@@ -43,9 +43,9 @@ class WorkspaceController {
         } catch (error) {
             res.status(500).json({ error: ' Internal Server Error. ' });
         }
-    };
+    }
 
-    public deleteWorkspace = async (req: Request, res: Response) => {
+    public async deleteWorkspace(req: Request, res: Response) {
         try {
             const savedWorkspace = await new WorkspaceService().deleteWorkspace(
                 req.params.id
@@ -54,7 +54,7 @@ class WorkspaceController {
         } catch (error) {
             res.status(500).json({ error: ' Internal Server Error. ' });
         }
-    };
+    }
 }
 
 export default WorkspaceController;
