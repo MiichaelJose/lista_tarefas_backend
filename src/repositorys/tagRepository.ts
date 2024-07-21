@@ -1,4 +1,3 @@
-import Tag from '../models/tag;model.ts';
 import TagSchema from '../schemas/tag.ts';
 
 class TagRepository {
@@ -6,7 +5,7 @@ class TagRepository {
         return await TagSchema.find();
     }
 
-    public async createTag(tag: Tag) {
+    public async createTag(tag: any) {
         try {
             const otag = new TagSchema(tag);
             return await otag.save();

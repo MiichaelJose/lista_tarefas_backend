@@ -1,26 +1,7 @@
 import { Request, Response } from 'express';
 import WorkspaceService from '../services/workspaceService';
 
-import { z } from "zod";
-import { defaultEndpointsFactory } from "express-zod-api";
-
 class WorkspaceController {
-
-   helloWorldEndpoint = defaultEndpointsFactory.build({
-        method: "get", // or methods: ["get", "post", ...]
-        input: z.object({
-          // for empty input use z.object({})
-          name: z.string().optional(),
-        }),
-        output: z.object({
-          greetings: z.string(),
-        }),
-        handler: async ({ input: { name }, options, logger }) => {
-          logger.debug("Options:", options); // middlewares provide options
-          return { greetings: `Hello, ${name || "World"}. Happy coding!` };
-        },
-    });
-
     public async fetchOneWorkspace(req: Request, res: Response) {
         try {
             const workspaces = await new WorkspaceService().fetchWorkspace(
@@ -32,7 +13,7 @@ class WorkspaceController {
         }
     }
 
-    public async fetchWorkspaces(req: Request, res: Response) {
+    public async fetchWorkspaces(res: Response) {
         try {
             const workspaces = await new WorkspaceService().fetchAllWorkspace();
             res.status(200).json(workspaces);
@@ -77,3 +58,31 @@ class WorkspaceController {
 }
 
 export default WorkspaceController;
+
+
+// import { z } from "zod";
+// import { defaultEndpointsFactory } from "express-zod-api";
+
+// function teste() {
+//     const hand = async ({ input: { name }, options , logger }: any) => {
+//         console.log(options);
+//         return { greetings: `Hello, ${name || "World"}. Happy coding!` };
+//     }
+
+//     const json: any = {
+//         method: "post", // or methods: ["get", "post", ...]
+//         input: z.object({
+//             id: z.string(),
+//             name: z.string().optional(),
+//             teste: z.string()
+//         }),
+//         output: z.object({
+//             greetings: z.string(),
+//         }),
+//         handler: hand
+//     }
+
+//     return defaultEndpointsFactory.build(json);
+// }
+
+// export default teste;
