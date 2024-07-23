@@ -10,6 +10,11 @@ const displaySchema = new mongoose.Schema({
         ref: 'workspaces',
         required: true,
     },
+    tagId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'tags',
+        required: true,
+    },
 });
 
 export default mongoose.model('displays', displaySchema);

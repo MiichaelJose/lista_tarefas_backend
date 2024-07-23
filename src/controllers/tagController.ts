@@ -2,15 +2,21 @@ import { Request, Response } from 'express';
 import TagService from '../services/tagService';
 
 class TagController {
-    private tagService: TagService;
+    //private tagService: TagService = new TagService();
 
-    constructor() {
-        this.tagService = new TagService();
+    public async fetchOneTag(req: Request, res: Response) {
+        try {
+            const tag = await new TagService().fetchOneTag(req.params.id);
+
+            res.status(200).json(tag);
+        } catch (error) {
+            res.status(500).json({ error: ' Internal Server Error. ' });
+        }
     }
 
-    fetchTags = async (req: Request, res: Response) => {
+    public async fetchTags(req: Request, res: Response) {
         try {
-            const tags = await this.tagService.fetchAllTags();
+            const tags = await new TagService().fetchAllTags();
 
             res.status(200).json(tags);
         } catch (error) {
@@ -22,10 +28,31 @@ class TagController {
         try {
             const body = req.body;
 
-            const tag = await this.tagService.createTag(body);
+            const tag = await new TagService().createTag(body);
             res.status(200).json(tag);
         } catch (error) {
             res.status(404).json({ error: ' Internal Server Error. ' });
+        }
+    }
+
+    public async changeTag(req: Request, res: Response) {
+        try {
+            const tag = await new TagService().updateTag(
+                req.params.id,
+                req.body
+            );
+            res.status(200).json(tag);
+        } catch (error) {
+            res.status(404).json({ error: ' Internal Server Error. ' });
+        }
+    }
+
+    public async deleteTag(req: Request, res: Response) {
+        try {
+            const tag = await new TagService().deleteTag(req.params.id);
+            res.status(200).json(tag);
+        } catch (error) {
+            res.status(500).json({ error: ' Internal Server Error. ' });
         }
     }
 }
