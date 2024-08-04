@@ -1,8 +1,9 @@
-import express from 'express';
-import router from './routes';
-import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
-import 'dotenv/config';
+import express from "express";
+import router from "./routes";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import "dotenv/config";
+import morgan from "morgan";
 
 //https://github.com/RobinTail/express-zod-api?tab=readme-ov-file
 //https://github.com/RobinTail/express-zod-api?tab=readme-ov-file#cross-origin-resource-sharing
@@ -48,14 +49,13 @@ const ENV: any = process.env;
 app.use(bodyParser.json());
 
 mongoose
-.connect(ENV.HOST_DATABASE)
-.then(() => {
-    console.log('Database connected successfully.');
-
-    app.listen(ENV.PORT, () => {
-        console.log(`Server is running on port : ${ENV.PORT} `);
-    });
-})
-.catch((error) => console.log(error));
+    .connect(ENV.HOST_DATABASE)
+    .then(() => {
+        console.log("Database connected successfully.");
+        app.listen(ENV.PORT, () => {
+            console.log(`Server is running on port : ${ENV.PORT} `);
+        });
+    })
+    .catch((error) => console.log(error));
 
 app.use(router);

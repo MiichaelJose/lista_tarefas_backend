@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import TagService from '../services/tagService';
+import { Request, Response } from "express";
+import TagService from "../services/tagService";
 
 class TagController {
     //private tagService: TagService = new TagService();
@@ -10,7 +10,7 @@ class TagController {
 
             res.status(200).json(tag);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 
@@ -20,9 +20,9 @@ class TagController {
 
             res.status(200).json(tags);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
-    };
+    }
 
     public async createTag(req: Request, res: Response) {
         try {
@@ -31,7 +31,7 @@ class TagController {
             const tag = await new TagService().createTag(body);
             res.status(200).json(tag);
         } catch (error) {
-            res.status(404).json({ error: ' Internal Server Error. ' });
+            res.status(404).json({ error: " Internal Server Error. " });
         }
     }
 
@@ -43,7 +43,7 @@ class TagController {
             );
             res.status(200).json(tag);
         } catch (error) {
-            res.status(404).json({ error: ' Internal Server Error. ' });
+            res.status(404).json({ error: " Internal Server Error. " });
         }
     }
 
@@ -52,7 +52,7 @@ class TagController {
             const tag = await new TagService().deleteTag(req.params.id);
             res.status(200).json(tag);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 }

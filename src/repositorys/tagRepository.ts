@@ -1,4 +1,4 @@
-import TagSchema from '../schemas/tag.ts';
+import TagSchema from "../schemas/tag.ts";
 
 class TagRepository {
     public async fetchOneTag(id: any) {
@@ -23,14 +23,14 @@ class TagRepository {
     public async updateTag(id: any, body: any) {
         return await TagSchema.findOneAndUpdate(
             { _id: id },
-            { 
-                name: body.name, 
-                image: body.image, 
-                txt_color_hex: body.txt_color_hex, 
-                bgd_color_hex: body.bgd_color_hex 
-            },   
-            { new: true }   
-        )
+            {
+                name: body.name,
+                image: body.image,
+                txt_color_hex: body.txt_color_hex,
+                bgd_color_hex: body.bgd_color_hex
+            },
+            { new: true }
+        );
     }
 
     public async deleteTag(id: any) {

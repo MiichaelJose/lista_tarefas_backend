@@ -1,4 +1,4 @@
-import TagRepository from '../repositorys/tagRepository.ts';
+import TagRepository from "../repositorys/tagRepository.ts";
 class TagService {
     private tagRepository: TagRepository;
 

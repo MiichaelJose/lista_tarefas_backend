@@ -1,4 +1,4 @@
-import WorkspaceRepository from '../repositorys/workspaceRepository';
+import WorkspaceRepository from "../repositorys/workspaceRepository";
 
 class WorkspaceService {
     private workspaceRepository: WorkspaceRepository;

@@ -1,4 +1,4 @@
-import Task from '../schemas/task.ts';
+import Task from "../schemas/task.ts";
 
 class TaskRepository {
     public async fetchOneTask(id: any) {
@@ -7,8 +7,8 @@ class TaskRepository {
 
     public async fetchOneTaskWithWorkspace(id: any) {
         const task = Task.findById(id)
-            .populate({ path: 'workspaceId', select: ['-_id', '-__v'] })
-            .populate({ path: 'tagId', select: ['name', 'txt_color_hex'] })
+            .populate({ path: "workspaceId", select: ["-_id", "-__v"] })
+            .populate({ path: "tagId", select: ["name", "txt_color_hex"] })
             .exec();
 
         task.then((resp) => {

@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import WorkspaceService from '../services/workspaceService';
+import { Request, Response } from "express";
+import WorkspaceService from "../services/workspaceService";
 
 class WorkspaceController {
     public async fetchOneWorkspace(req: Request, res: Response) {
@@ -9,16 +9,16 @@ class WorkspaceController {
             );
             res.status(200).json(workspaces);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 
-    public async fetchWorkspaces(res: Response) {
+    public async fetchWorkspaces(req: Request, res: Response) {
         try {
             const workspaces = await new WorkspaceService().fetchAllWorkspace();
             res.status(200).json(workspaces);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 
@@ -29,7 +29,7 @@ class WorkspaceController {
             );
             res.status(200).json(workspace);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 
@@ -41,7 +41,7 @@ class WorkspaceController {
             );
             res.status(200).json(workspace);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 
@@ -52,13 +52,12 @@ class WorkspaceController {
             );
             res.status(200).json(savedWorkspace);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 }
 
 export default WorkspaceController;
-
 
 // import { z } from "zod";
 // import { defaultEndpointsFactory } from "express-zod-api";

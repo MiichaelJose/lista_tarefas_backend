@@ -1,7 +1,5 @@
-import { Request, Response } from 'express';
-import TaskService from '../services/taskService';
-//import NotificationService from '../services/notificationService';
-import { z } from "zod";
+import { Request, Response } from "express";
+import TaskService from "../services/taskService";
 
 class TaskController {
     public async fetchTasks(req: Request, res: Response) {
@@ -10,7 +8,7 @@ class TaskController {
 
             res.status(200).json(tasks);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 
@@ -22,12 +20,12 @@ class TaskController {
 
             res.status(200).json(task);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 
     public async fetchOneTask(req: Request, res: Response) {
-        console.log('oi');
+        console.log("oi");
 
         try {
             const task = await new TaskService().fetchOneTask(req.params.id);
@@ -36,7 +34,7 @@ class TaskController {
         } catch (error) {
             console.log(error);
 
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 
@@ -51,7 +49,7 @@ class TaskController {
         } catch (error) {
             console.log(error);
 
-            res.status(404).json({ error: ' Internal Server Error. ' });
+            res.status(404).json({ error: " Internal Server Error. " });
         }
     }
 
@@ -63,7 +61,7 @@ class TaskController {
             );
             res.status(200).json(task);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 
@@ -72,7 +70,7 @@ class TaskController {
             const savedTask = await new TaskService().deleteTask(req.params.id);
             res.status(200).json(savedTask);
         } catch (error) {
-            res.status(500).json({ error: ' Internal Server Error. ' });
+            res.status(500).json({ error: " Internal Server Error. " });
         }
     }
 }

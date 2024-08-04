@@ -1,4 +1,4 @@
-import TaskRepository from '../repositorys/taskRepository.ts';
+import TaskRepository from "../repositorys/taskRepository.ts";
 
 class TaskService {
     private taskRepository: TaskRepository;

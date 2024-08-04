@@ -1,4 +1,4 @@
-import Notification from '../schemas/notification';
+import Notification from "../schemas/notification";
 
 class NotificationService {
     async fetchOneNotification(id: any) {
