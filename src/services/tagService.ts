@@ -1,4 +1,5 @@
 import TagRepository from "../repositorys/tagRepository.ts";
+
 class TagService {
     private tagRepository: TagRepository;
 

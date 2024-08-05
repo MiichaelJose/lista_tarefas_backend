@@ -51,3 +51,12 @@ export const taskUpdateRegistrationSchema = z.object({
     initial_at: z.string().datetime({ offset: true }),
     ended_at: z.date().optional()
 });
+
+export const displayCreateRegistrationSchema = z.object({
+    type: z.string().optional(),
+    workspaceId: z.string(),
+    tagId: z.string(),
+    journeys: z.array(z.object({
+        name: z.string()
+    })).optional()
+});

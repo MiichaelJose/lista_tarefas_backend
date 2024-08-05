@@ -3,7 +3,10 @@ import { validateData } from "../middlewares/zodValidation";
 import TaskController from "../controllers/taskController";
 import TagController from "../controllers/tagController";
 import WorkspaceController from "../controllers/workspaceController";
+import DisplayController from "../controllers/displayController";
+
 import {
+    displayCreateRegistrationSchema,
     tagCreateRegistrationSchema,
     tagUpdateRegistrationSchema,
     taskCreateRegistrationSchema,
@@ -20,6 +23,7 @@ const router = Router();
 const taskController = new TaskController();
 const tagController = new TagController();
 const workspaceController = new WorkspaceController();
+const displayController = new DisplayController();
 
 router.use([morganLog]);
 //router.use(verifyHeaderProxy);
@@ -66,5 +70,14 @@ router.put(
     validateData(workspaceUpdateRegistrationSchema),
     workspaceController.changeWorkspace
 );
+
+router.get("/display/one/:id", displayController.fetchOneDisplay);
+router.get("/display/all", displayController.fetchDisplays);
+router.post(
+    "/display",
+    validateData(displayCreateRegistrationSchema),
+    displayController.createDisplay
+);
+router.delete("/display/:id", displayController.deleteDisplay);
 
 export default router;
