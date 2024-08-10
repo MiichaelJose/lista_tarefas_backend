@@ -13,19 +13,19 @@ class DisplayRepository {
         ]).exec();
     }
 
-    public async createDisplay(display: any) {
+    public async createDisplay(body: any) {
         try {
-            const existingDisplaysCount = await DisplaySchema.countDocuments({ workspaceId: display.workspaceId });
+            const existingDisplaysCount = await DisplaySchema.countDocuments({ workspaceId: body.workspaceId });
             
             if (existingDisplaysCount >= 3) {
                 return { success: false, message: 'Maximum number of displays (3) for this workspace reached.' };
             }
 
-            const journeysData = display.journeys;
+            const journeysData = body.journeys;
             const journeys = await Journey.insertMany(journeysData);
     
             const otag = new DisplaySchema({
-                ...display,
+                ...body,
                 journeys: journeys.map(journey => journey._id) // Usando os ObjectId dos Journeys salvos
             });
     
@@ -35,16 +35,15 @@ class DisplayRepository {
         }
     }
 
-    // public async updateDisplay(id: any, body: any) {
-    //     return await DisplaySchema.findOneAndUpdate(
-    //         { _id: id },
-    //         {
-    //             type: body.name,
-    //             image: body.image,
-    //         },
-    //         { new: true }
-    //     );
-    // }
+    public async updateDisplay(id: any, body: any) {
+        return await DisplaySchema.findOneAndUpdate(
+            { _id: id },
+            {
+                type: body.type,
+            },
+            { new: true }
+        );
+    }
 
     public async deleteDisplay(id: any) {
         return await DisplaySchema.deleteOne({ _id: id });

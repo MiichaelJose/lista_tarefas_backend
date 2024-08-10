@@ -19,9 +19,9 @@ class DisplayService {
         return await this.displayRepository.createDisplay(tag);
     }
 
-    // public async updateTag(id: any, body: any) {
-    //     return await this.displayRepository.updateTag(id, body);
-    // }
+    public async updateDisplay(id: any, body: any) {
+        return await this.displayRepository.updateDisplay(id, body);
+    }
 
     public async deleteTag(id: any) {
         return await this.displayRepository.deleteDisplay(id);

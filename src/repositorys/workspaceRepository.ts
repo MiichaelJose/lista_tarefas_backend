@@ -14,11 +14,11 @@ class WorkspaceRepository {
         return await workspace.save();
     }
 
-    public async updateWorkspace(id: any, name: any) {
+    public async updateWorkspace(id: any, body: any) {
         //alternativa { $set:boy }, { new: true, runValidators: true }
         return await Workspace.findOneAndUpdate(
             { _id: id },
-            { name: name },
+            { name: body.name },
             { new: true }
         );
     }

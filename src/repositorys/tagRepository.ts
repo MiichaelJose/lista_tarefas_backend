@@ -9,9 +9,9 @@ class TagRepository {
         return await TagSchema.find();
     }
 
-    public async createTag(tag: any) {
+    public async createTag(body: any) {
         try {
-            const otag = new TagSchema(tag);
+            const otag = new TagSchema(body);
             return await otag.save();
         } catch (error) {
             console.log(error);

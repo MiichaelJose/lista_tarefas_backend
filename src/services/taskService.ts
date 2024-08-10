@@ -1,3 +1,4 @@
+import dayjs from "../libs/dayjs.ts";
 import TaskRepository from "../repositorys/taskRepository.ts";
 
 class TaskService {
@@ -20,7 +21,17 @@ class TaskService {
     }
 
     public async createTask(body: any) {
-        return await this.taskRepository.createTask(body);
+        const dateNow = dayjs(new Date()).utc().local().format();
+        const dateInitial = dayjs(body.initial_at).utc().local().format();
+
+        if(dateInitial >= dateNow) {
+            console.log(dateNow);
+            console.log(dateInitial);
+            
+            return await this.taskRepository.createTask(body);
+        }
+
+        return { status: 'ERROR', mensagem: 'A data inicial deve ser maior que a data atual.' };
     }
 
     public async updateTask(id: any, body: any) {

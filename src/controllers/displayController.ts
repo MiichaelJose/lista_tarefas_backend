@@ -33,17 +33,17 @@ class DisplayController {
         }
     }
 
-    // public async changeTag(req: Request, res: Response) {
-    //     try {
-    //         const tag = await new DisplayService().updateTag(
-    //             req.params.id,
-    //             req.body
-    //         );
-    //         res.status(200).json(tag);
-    //     } catch (error) {
-    //         res.status(404).json({ error: " Internal Server Error. " });
-    //     }
-    // }
+    public async changeDisplay(req: Request, res: Response) {
+        try {
+            const tag = await new DisplayService().updateDisplay(
+                req.params.id,
+                req.body
+            );
+            res.status(200).json(tag);
+        } catch (error) {
+            res.status(404).json({ error: " Internal Server Error. " });
+        }
+    }
 
     public async deleteDisplay(req: Request, res: Response) {
         try {

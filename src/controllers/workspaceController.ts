@@ -37,7 +37,7 @@ class WorkspaceController {
         try {
             const workspace = await new WorkspaceService().updateWorkspace(
                 req.params.id,
-                req.body.name
+                req.body
             );
             res.status(200).json(workspace);
         } catch (error) {

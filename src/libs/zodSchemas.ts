@@ -31,7 +31,7 @@ export const taskCreateRegistrationSchema = z.object({
             _id: z.string(),
             name: z.string()
         })
-    ),
+    ).optional(),
     status: z.string().optional(),
     initial_at: z.string().datetime({ offset: true }),
     ended_at: z.date().optional()

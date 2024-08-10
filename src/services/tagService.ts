@@ -15,8 +15,8 @@ class TagService {
         return await this.tagRepository.fetchAllTags();
     }
 
-    public async createTag(tag: any) {
-        return await this.tagRepository.createTag(tag);
+    public async createTag(body: any) {
+        return await this.tagRepository.createTag(body);
     }
 
     public async updateTag(id: any, body: any) {
