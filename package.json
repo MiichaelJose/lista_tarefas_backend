@@ -32,6 +32,7 @@
         "mongodb": "6.6",
         "mongoose": "^8.5.2",
         "morgan": "^1.10.0",
+        "uuid": "^10.0.0",
         "zod": "^3.23.8"
     },
     "devDependencies": {
@@ -39,6 +40,7 @@
         "@types/http-errors": "^2.0.4",
         "@types/morgan": "^1.9.9",
         "@types/node": "^20.14.11",
+        "@types/uuid": "^10.0.0",
         "nodemon": "^3.1.0",
         "prettier": "3.3.2",
         "ts-node": "^10.9.2",

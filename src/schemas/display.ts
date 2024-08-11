@@ -4,7 +4,9 @@ import mongoose from "mongoose";
 // por enquanto temos apenas um (journey)
 const displaySchema = new mongoose.Schema({
     type: { type: String, require: true, default: "journey" },
-    journeys: [{ type: mongoose.Schema.Types.ObjectId, ref: 'journeys', required: true}],
+    journeys: [
+        { type: mongoose.Schema.Types.ObjectId, ref: 'journeys', required: true }
+    ],
     workspaceId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "workspaces",
