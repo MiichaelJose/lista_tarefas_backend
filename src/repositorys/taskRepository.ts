@@ -5,9 +5,9 @@ class TaskRepository {
         return await Task.findById(id);
     }
 
-    public async fetchOneTaskWithWorkspace(id: any) {
+    public async fetchOneTaskWithDisplay(id: any) {
         const task = Task.findById(id)
-            .populate({ path: "workspaceId", select: ["-_id", "-__v"] })
+            .populate({ path: "displayId", select: ["-_id", "-__v"] })
             .populate({ path: "tagId", select: ["name", "txt_color_hex"] })
             .exec();
 

@@ -1,23 +1,16 @@
+import mongoose from "mongoose";
+import { ApiError } from "../libs/apiError";
 import Workspace from "../schemas/workspace";
 
-class ApiError extends Error {
-    statusCode: any;
-    error: any;
-    details: {};
-
-    constructor(statusCode: any, error: any, message: string | undefined, details = {}) {
-        super(message);
-        this.statusCode = statusCode;
-        this.error = error;
-        this.details = details;
-    }
-}
-
 class WorkspaceRepository {
-    public async fetchWorkspace(id: any) {
+    public async fetchWorkspace(id: any) { 
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
+        }
 
-        return new ApiError(500, 'Internal Server Error', 'Não foi possível processar a solicitação. Tente novamente mais tarde.');
-        //return await Workspace.findById(id);
+        const workspace = await Workspace.findById(id)
+
+        return workspace;
     }
 
     public async fetchAllWorkspace() {
@@ -31,14 +24,24 @@ class WorkspaceRepository {
 
     public async updateWorkspace(id: any, body: any) {
         //alternativa { $set:boy }, { new: true, runValidators: true }
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
+        }
+        
         return await Workspace.findOneAndUpdate(
             { _id: id },
-            { name: body.name },
+            {
+                name: body.name,
+            },
             { new: true }
         );
     }
 
     public async deleteWorkspace(id: any) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
+        }
+
         return await Workspace.deleteOne({ _id: id });
     }
 }

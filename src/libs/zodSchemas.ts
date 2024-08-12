@@ -1,11 +1,20 @@
 import { z } from "zod";
 
+export const workspaceIdSchema = z.object({
+    id: z.string()
+});
+
 export const workspaceCreateRegistrationSchema = z.object({
     name: z.string()
 });
 
 export const workspaceUpdateRegistrationSchema = z.object({
     name: z.string()
+});
+
+
+export const tagIdSchema = z.object({
+    id: z.string().uuid(),   // Valida se o parâmetro 'id' é um UUID válido
 });
 
 export const tagCreateRegistrationSchema = z.object({

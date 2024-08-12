@@ -1,3 +1,4 @@
+import { ApiError } from "../libs/apiError.ts";
 import DisplayRepository from "../repositorys/displayRepository.ts";
 
 class DisplayService {
@@ -7,15 +8,21 @@ class DisplayService {
         this.displayRepository = new DisplayRepository();
     }
 
-    public async fetchOneTag(id: any) {
-        return await this.displayRepository.fetchOneDisplay(id);
+    public async fetchOneDisplay(id: any) {
+        const display = await this.displayRepository.fetchOneDisplay(id);
+
+        if (!display) {
+            throw new ApiError(404, 'Display not found', 'Não foi possível encontrar esse display', { id: id });
+        }
+
+        return display;
     }
 
-    public async fetchAllTags() {
+    public async fetchAllDisplays() {
         return await this.displayRepository.fetchAllDisplays();
     }
 
-    public async createTag(tag: any) {
+    public async createDisplay(tag: any) {
         return await this.displayRepository.createDisplay(tag);
     }
 
@@ -23,7 +30,7 @@ class DisplayService {
         return await this.displayRepository.updateDisplay(id, body);
     }
 
-    public async deleteTag(id: any) {
+    public async deleteDisplay(id: any) {
         return await this.displayRepository.deleteDisplay(id);
     }
 }

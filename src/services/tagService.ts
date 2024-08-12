@@ -1,3 +1,4 @@
+import { ApiError } from "../libs/apiError.ts";
 import TagRepository from "../repositorys/tagRepository.ts";
 
 class TagService {
@@ -8,7 +9,13 @@ class TagService {
     }
 
     public async fetchOneTag(id: any) {
-        return await this.tagRepository.fetchOneTag(id);
+        const tag = await this.tagRepository.fetchOneTag(id);
+
+        if (!tag) {
+            throw new ApiError(404, 'Tag not found', 'Não foi possível encontrar esta tag', { id: id });
+        }
+        
+        return tag;
     }
 
     public async fetchAllTags() {

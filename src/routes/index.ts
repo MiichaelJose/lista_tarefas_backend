@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateData } from "../middlewares/zodValidation";
+import { reqValidateData, bodyValidateData, reqbodyValidateData } from "../middlewares/zodValidation";
 import TaskController from "../controllers/taskController";
 import TagController from "../controllers/tagController";
 import WorkspaceController from "../controllers/workspaceController";
@@ -12,11 +12,14 @@ import {
     taskCreateRegistrationSchema,
     taskUpdateRegistrationSchema,
     workspaceCreateRegistrationSchema,
-    workspaceUpdateRegistrationSchema
+    workspaceUpdateRegistrationSchema,
+    workspaceIdSchema,
+    tagIdSchema
 } from "../libs/zodSchemas";
 
 import morganLog from "../middlewares/morganLog";
 import verifyHeaderProxy from "../middlewares/proxyVerify";
+import { apiErrorValidation } from "../middlewares/apiErrorValidation";
 
 const router = Router();
 
@@ -25,35 +28,34 @@ const tagController = new TagController();
 const workspaceController = new WorkspaceController();
 const displayController = new DisplayController();
 
-router.use([morganLog]);
 //router.use(verifyHeaderProxy);
 
 router.get("/one/:id", taskController.fetchOneTask);
-router.get("/one-with-workspace/:id", taskController.fetchOneTaskWithWorkspace);
+router.get("/one-with-display/:id", taskController.fetchOneTaskWithWorkspace);
 router.get("/all", taskController.fetchTasks);
 router.delete("/delete/:id", taskController.deleteTask);
 router.put(
     "/put/:id",
-    validateData(taskUpdateRegistrationSchema),
+    bodyValidateData(taskUpdateRegistrationSchema),
     taskController.changeTask
 );
 router.post(
     "/create",
-    validateData(taskCreateRegistrationSchema),
+    bodyValidateData(taskCreateRegistrationSchema),
     taskController.createTask
 );
 
-router.get("/tag/one/:id", tagController.fetchOneTag);
+router.get("/tag/one/:id", reqValidateData(tagIdSchema), tagController.fetchOneTag);
 router.get("/tag/all", tagController.fetchTags);
 router.delete("/tag/:id", tagController.deleteTag);
 router.post(
     "/tag/create",
-    validateData(tagCreateRegistrationSchema),
+    reqbodyValidateData(tagIdSchema, tagCreateRegistrationSchema),
     tagController.createTag
 );
 router.put(
     "/tag/put/:id",
-    validateData(tagUpdateRegistrationSchema),
+    reqbodyValidateData(tagIdSchema, tagUpdateRegistrationSchema), //bodyValidateData(tagUpdateRegistrationSchema),
     tagController.changeTag
 );
 
@@ -62,12 +64,12 @@ router.get("/workspace/all/", workspaceController.fetchWorkspaces);
 router.delete("/workspace/:id", workspaceController.deleteWorkspace);
 router.post(
     "/workspace",
-    validateData(workspaceCreateRegistrationSchema),
+    bodyValidateData(workspaceCreateRegistrationSchema),
     workspaceController.createWorkspace
 );
 router.put(
     "/workspace/put/:id",
-    validateData(workspaceUpdateRegistrationSchema),
+    reqbodyValidateData(workspaceIdSchema, workspaceUpdateRegistrationSchema),
     workspaceController.changeWorkspace
 );
 
@@ -75,9 +77,11 @@ router.get("/display/one/:id", displayController.fetchOneDisplay);
 router.get("/display/all", displayController.fetchDisplays);
 router.post(
     "/display",
-    validateData(displayCreateRegistrationSchema),
+    bodyValidateData(displayCreateRegistrationSchema),
     displayController.createDisplay
 );
 router.delete("/display/:id", displayController.deleteDisplay);
+
+router.use([morganLog, apiErrorValidation]);
 
 export default router;

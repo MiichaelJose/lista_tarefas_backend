@@ -1,3 +1,4 @@
+import { ApiError } from "../libs/apiError.ts";
 import dayjs from "../libs/dayjs.ts";
 import TaskRepository from "../repositorys/taskRepository.ts";
 
@@ -9,11 +10,17 @@ class TaskService {
     }
 
     public async fetchOneTask(id: any) {
-        return await this.taskRepository.fetchOneTask(id);
+        const task = await this.taskRepository.fetchOneTask(id);
+
+        if (!task) {
+            throw new ApiError(404, 'Task not found', 'Não foi possível encontrar esta task', { id: id });
+        }
+
+        return task;
     }
 
-    public async fetchOneTaskWithWorkspace(id: any) {
-        return await this.taskRepository.fetchOneTaskWithWorkspace(id);
+    public async fetchOneTaskWithDisplay(id: any) {
+        return await this.taskRepository.fetchOneTaskWithDisplay(id);
     }
 
     public async fetchAllTasks() {
