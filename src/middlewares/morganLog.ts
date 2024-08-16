@@ -2,6 +2,7 @@ import morgan from "morgan";
 import fs from "fs";
 import path from "path";
 import os from "os";
+import { ApiError } from "../libs/apiError";
 
 // Função para obter o IP da máquina servidora
 const getServerIP = () => {
@@ -18,7 +19,7 @@ const getServerIP = () => {
 };
 
 // Exibindo o IP da máquina servidora
-console.log("Server IP Address:", getServerIP());
+console.log(new ApiError(403, "Server IP Address: " + getServerIP(), "IP", {}));
 
 // Cria um stream de escrita para o arquivo de log
 const accessLogStream = fs.createWriteStream(

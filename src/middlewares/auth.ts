@@ -1,11 +1,10 @@
 import axios from "axios";
+import { ApiError } from "../libs/apiError";
 
 export const auth = async (req: any, res: any, next: any) => {
     let header = req.header("authorization");
 
-    let msg = {
-        msg: "Token não encontrado!"
-    };
+    let msg = new ApiError(403, "Token inválido", "Token inválido", {});
 
     if (header == undefined) {
         console.log("Token não encontrado!");
@@ -18,8 +17,7 @@ export const auth = async (req: any, res: any, next: any) => {
         if (response?.name === "JsonWebTokenError") {
             res.status(404).json(msg);
         } else {
-            // permite realizar requisão para proxima rota de qualquer method
-            next();
+            next(); // permite realizar requisão para proxima rota de qualquer method
         }
     }
 };
@@ -31,8 +29,6 @@ const verifyRequest = async (authorization_header: any) => {
     };
 
     const response = await axios.get(url, { headers });
-
-    console.log("Resposta do microserviço:", response.data?.name);
 
     return response.data;
 };

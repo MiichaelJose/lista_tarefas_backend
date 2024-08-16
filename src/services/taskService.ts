@@ -9,7 +9,7 @@ class TaskService {
         this.taskRepository = new TaskRepository();
     }
 
-    public async fetchOneTask(id: any) {
+    public async fetchOneTask(id: string) {
         const task = await this.taskRepository.fetchOneTask(id);
 
         if (!task) {
@@ -19,7 +19,7 @@ class TaskService {
         return task;
     }
 
-    public async fetchOneTaskWithDisplay(id: any) {
+    public async fetchOneTaskWithDisplay(id: string) {
         return await this.taskRepository.fetchOneTaskWithDisplay(id);
     }
 
@@ -31,21 +31,18 @@ class TaskService {
         const dateNow = dayjs(new Date()).utc().local().format();
         const dateInitial = dayjs(body.initial_at).utc().local().format();
 
-        if(dateInitial >= dateNow) {
-            console.log(dateNow);
-            console.log(dateInitial);
-            
-            return await this.taskRepository.createTask(body);
+        if(dateInitial < dateNow) {
+            throw new ApiError(404, 'Data not found', 'A data inicial deve ser maior que a data atual.', { datainitial: dateInitial });
         }
 
-        return { status: 'ERROR', mensagem: 'A data inicial deve ser maior que a data atual.' };
+        return await this.taskRepository.createTask(body);
     }
 
-    public async updateTask(id: any, body: any) {
+    public async updateTask(id: string, body: any) {
         return await this.taskRepository.updateTask(id, body);
     }
 
-    public async deleteTask(id: any) {
+    public async deleteTask(id: string) {
         return await this.taskRepository.deleteTask(id);
     }
 }

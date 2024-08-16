@@ -3,7 +3,7 @@ import { ApiError } from "../libs/apiError";
 import Workspace from "../schemas/workspace";
 
 class WorkspaceRepository {
-    public async fetchWorkspace(id: any) { 
+    public async fetchWorkspace(id: string) { 
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
         }
@@ -22,7 +22,7 @@ class WorkspaceRepository {
         return await workspace.save();
     }
 
-    public async updateWorkspace(id: any, body: any) {
+    public async updateWorkspace(id: string, body: any) {
         //alternativa { $set:boy }, { new: true, runValidators: true }
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
@@ -37,7 +37,7 @@ class WorkspaceRepository {
         );
     }
 
-    public async deleteWorkspace(id: any) {
+    public async deleteWorkspace(id: string) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
         }

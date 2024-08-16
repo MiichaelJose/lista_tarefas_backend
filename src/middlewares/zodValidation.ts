@@ -7,7 +7,6 @@ export function reqbodyValidateData(paramsSchema: z.ZodObject<any, any, any, any
         try {
             paramsSchema.parse(req.params);
             bodySchema.parse(req.body);
-            
             next();
         } catch (error) {
             if (error instanceof ZodError) {

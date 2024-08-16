@@ -1,7 +1,13 @@
+import mongoose from "mongoose";
 import TagSchema from "../schemas/tag.ts";
+import { ApiError } from "../libs/apiError.ts";
 
 class TagRepository {
-    public async fetchOneTag(id: any) {
+    public async fetchOneTag(id: string) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
+        }
+
         return await TagSchema.findById(id);
     }
 
@@ -20,7 +26,11 @@ class TagRepository {
         }
     }
 
-    public async updateTag(id: any, body: any) {
+    public async updateTag(id: string, body: any) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
+        }
+
         return await TagSchema.findOneAndUpdate(
             { _id: id },
             {
@@ -33,7 +43,11 @@ class TagRepository {
         );
     }
 
-    public async deleteTag(id: any) {
+    public async deleteTag(id: string) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
+        }
+
         return await TagSchema.deleteOne({ _id: id });
     }
 }

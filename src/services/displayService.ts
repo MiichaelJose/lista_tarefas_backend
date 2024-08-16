@@ -8,7 +8,7 @@ class DisplayService {
         this.displayRepository = new DisplayRepository();
     }
 
-    public async fetchOneDisplay(id: any) {
+    public async fetchOneDisplay(id: string) {
         const display = await this.displayRepository.fetchOneDisplay(id);
 
         if (!display) {
@@ -22,15 +22,15 @@ class DisplayService {
         return await this.displayRepository.fetchAllDisplays();
     }
 
-    public async createDisplay(tag: any) {
-        return await this.displayRepository.createDisplay(tag);
+    public async createDisplay(body: any) {
+        return await this.displayRepository.createDisplay(body);
     }
 
-    public async updateDisplay(id: any, body: any) {
+    public async updateDisplay(id: string, body: any) {
         return await this.displayRepository.updateDisplay(id, body);
     }
 
-    public async deleteDisplay(id: any) {
+    public async deleteDisplay(id: string) {
         return await this.displayRepository.deleteDisplay(id);
     }
 }

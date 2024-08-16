@@ -8,7 +8,7 @@ class TagService {
         this.tagRepository = new TagRepository();
     }
 
-    public async fetchOneTag(id: any) {
+    public async fetchOneTag(id: string) {
         const tag = await this.tagRepository.fetchOneTag(id);
 
         if (!tag) {
@@ -26,11 +26,11 @@ class TagService {
         return await this.tagRepository.createTag(body);
     }
 
-    public async updateTag(id: any, body: any) {
+    public async updateTag(id: string, body: any) {
         return await this.tagRepository.updateTag(id, body);
     }
 
-    public async deleteTag(id: any) {
+    public async deleteTag(id: string) {
         return await this.tagRepository.deleteTag(id);
     }
 }

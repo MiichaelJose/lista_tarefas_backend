@@ -1,6 +1,5 @@
 import { ApiError } from "../libs/apiError";
 import WorkspaceRepository from "../repositorys/workspaceRepository";
-import workspace from "../schemas/workspace";
 
 class WorkspaceService {
     private workspaceRepository: WorkspaceRepository;
@@ -9,7 +8,7 @@ class WorkspaceService {
         this.workspaceRepository = new WorkspaceRepository();
     }
 
-    public async fetchWorkspace(id: any) {
+    public async fetchWorkspace(id: string) {
         const workspace = await this.workspaceRepository.fetchWorkspace(id);
 
         if (!workspace) {
@@ -27,11 +26,9 @@ class WorkspaceService {
         return await this.workspaceRepository.createWorkspace(body);
     }
 
-    public async updateWorkspace(id: any, body: any) {
+    public async updateWorkspace(id: string, body: any) {
         const workspace = await this.workspaceRepository.updateWorkspace(id, body);
 
-        console.log(workspace);
-        
         if (!workspace) {
             throw new ApiError(404, 'Workspace not found', 'Não foi possível encontrar esta workspace', { id: id });
         }
@@ -39,7 +36,7 @@ class WorkspaceService {
         return workspace;
     }
 
-    public async deleteWorkspace(id: any) {
+    public async deleteWorkspace(id: string) {
         return await this.workspaceRepository.deleteWorkspace(id);
     }
 }
