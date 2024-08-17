@@ -42,7 +42,7 @@ class WorkspaceRepository {
             throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
         }
 
-        return await Workspace.deleteOne({ _id: id });
+        return await Workspace.findOneAndDelete({ _id: id });
     }
 }
 

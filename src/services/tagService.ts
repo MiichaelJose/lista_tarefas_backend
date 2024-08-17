@@ -19,7 +19,13 @@ class TagService {
     }
 
     public async fetchAllTags() {
-        return await this.tagRepository.fetchAllTags();
+        const tags = await this.tagRepository.fetchAllTags();
+
+        if (!tags.length) {
+            throw new ApiError(404, 'Tags not found', 'Não foi possível encontrar Tags', {});
+        }
+
+        return tags;
     }
 
     public async createTag(body: any) {
@@ -27,11 +33,23 @@ class TagService {
     }
 
     public async updateTag(id: string, body: any) {
-        return await this.tagRepository.updateTag(id, body);
+        const tag = await this.tagRepository.updateTag(id, body);
+
+        if (!tag) {
+            throw new ApiError(404, 'Tag not found', 'Não foi possível encontrar esta Tag', { id: id });
+        }
+
+        return tag;
     }
 
     public async deleteTag(id: string) {
-        return await this.tagRepository.deleteTag(id);
+        const tag = await this.tagRepository.deleteTag(id);
+
+        if (!tag) {
+            throw new ApiError(404, 'Tag not found', 'Não foi possível encontrar esta Tag', { id: id });
+        }
+
+        return tag;
     }
 }
 

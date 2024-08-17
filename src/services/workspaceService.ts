@@ -19,7 +19,13 @@ class WorkspaceService {
     }
 
     public async fetchAllWorkspace() {
-        return await this.workspaceRepository.fetchAllWorkspace();
+        const workspaces = await this.workspaceRepository.fetchAllWorkspace();
+        
+        if(!workspaces.length) {
+            throw new ApiError(404, 'Workspaces not found', 'Não foi possível encontrar Workspaces');
+        }
+
+        return workspaces;
     }
 
     public async createWorkspace(body: any) {
@@ -37,7 +43,13 @@ class WorkspaceService {
     }
 
     public async deleteWorkspace(id: string) {
-        return await this.workspaceRepository.deleteWorkspace(id);
+        const workspace = await this.workspaceRepository.deleteWorkspace(id);
+
+        if (!workspace) {
+            throw new ApiError(404, 'Workspace not found', 'Não foi possível encontrar esta workspace', { id: id });
+        }
+
+        return workspace;
     }
 }
 

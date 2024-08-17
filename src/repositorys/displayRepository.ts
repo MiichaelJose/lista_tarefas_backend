@@ -60,7 +60,7 @@ class DisplayRepository {
             throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
         }
 
-        return await DisplaySchema.deleteOne({ _id: id });
+        return await DisplaySchema.findOneAndDelete({ _id: id });
     }
 }
 

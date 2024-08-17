@@ -19,7 +19,13 @@ class DisplayService {
     }
 
     public async fetchAllDisplays() {
-        return await this.displayRepository.fetchAllDisplays();
+        const displays = await this.displayRepository.fetchAllDisplays();
+
+        if (!displays.length) {
+            throw new ApiError(404, 'Display not found', 'Não foi possível encontrar Displays', {});
+        }
+
+        return displays;
     }
 
     public async createDisplay(body: any) {
@@ -27,11 +33,23 @@ class DisplayService {
     }
 
     public async updateDisplay(id: string, body: any) {
-        return await this.displayRepository.updateDisplay(id, body);
+        const display = await this.displayRepository.updateDisplay(id, body);
+
+        if (!display) {
+            throw new ApiError(404, 'Display not found', 'Não foi possível encontrar este Display', { id: id });
+        }
+
+        return display;
     }
 
     public async deleteDisplay(id: string) {
-        return await this.displayRepository.deleteDisplay(id);
+        const display = await this.displayRepository.deleteDisplay(id);
+
+        if (!display) {
+            throw new ApiError(404, 'Display not found', 'Não foi possível encontrar este Display', { id: id });
+        }
+
+        return display;
     }
 }
 

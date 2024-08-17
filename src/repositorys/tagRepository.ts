@@ -20,8 +20,6 @@ class TagRepository {
             const otag = new TagSchema(body);
             return await otag.save();
         } catch (error) {
-            console.log(error);
-
             return error;
         }
     }
@@ -48,7 +46,7 @@ class TagRepository {
             throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
         }
 
-        return await TagSchema.deleteOne({ _id: id });
+        return await TagSchema.findOneAndDelete({ _id: id });
     }
 }
 

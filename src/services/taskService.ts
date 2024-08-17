@@ -20,11 +20,23 @@ class TaskService {
     }
 
     public async fetchOneTaskWithDisplay(id: string) {
-        return await this.taskRepository.fetchOneTaskWithDisplay(id);
+        const task = await this.taskRepository.fetchOneTaskWithDisplay(id);
+
+        if (!task) {
+            throw new ApiError(404, 'Task with display not found', 'Não foi possível encontrar esta task', { id: id });
+        }
+
+        return task;
     }
 
     public async fetchAllTasks() {
-        return await this.taskRepository.fetchAllTasks();
+        const tasks = await this.taskRepository.fetchAllTasks();
+
+        if(!tasks.length) {
+            throw new ApiError(404, 'Tasks not found', 'Não foi possível encontrar Tasks');
+        }
+
+        return tasks;
     }
 
     public async createTask(body: any) {
@@ -39,11 +51,22 @@ class TaskService {
     }
 
     public async updateTask(id: string, body: any) {
-        return await this.taskRepository.updateTask(id, body);
+        const task = await this.taskRepository.updateTask(id, body);
+
+        if (!task) {
+            throw new ApiError(404, 'Task not found', 'Não foi possível encontrar esta task', { id: id });
+        }
+        return task;
     }
 
     public async deleteTask(id: string) {
-        return await this.taskRepository.deleteTask(id);
+        const task = await this.taskRepository.deleteTask(id);
+
+        if (!task) {
+            throw new ApiError(404, 'Task not found', 'Não foi possível encontrar esta task', { id: id });
+        }
+
+        return task;
     }
 }
 

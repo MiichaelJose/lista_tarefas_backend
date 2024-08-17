@@ -30,56 +30,25 @@ const displayController = new DisplayController();
 
 //router.use(verifyHeaderProxy);
 
-router.get("/one/:id", taskController.fetchOneTask);
-router.get("/one-with-display/:id", taskController.fetchOneTaskWithWorkspace);
-router.get("/all", taskController.fetchTasks);
-router.delete("/delete/:id", taskController.deleteTask);
-router.put(
-    "/put/:id",
-    bodyValidateData(taskUpdateRegistrationSchema),
-    taskController.changeTask
-);
-router.post(
-    "/create",
-    bodyValidateData(taskCreateRegistrationSchema),
-    taskController.createTask
-);
-
-router.get("/tag/one/:id", reqValidateData(tagIdSchema), tagController.fetchOneTag);
+router.get("/task/one/:id", taskController.fetchOneTask);
+router.get("/task/display/:id", taskController.fetchOneTaskWithWorkspace);
+router.get("/task/all", taskController.fetchTasks);
+router.delete("/task/delete/:id", taskController.deleteTask);
+router.put("/task/put/:id", bodyValidateData(taskUpdateRegistrationSchema), taskController.changeTask);
+router.post("/task/create",bodyValidateData(taskCreateRegistrationSchema),taskController.createTask);
+router.get("/tag/one/:id", reqValidateData(tagIdSchema),tagController.fetchOneTag);
 router.get("/tag/all", tagController.fetchTags);
 router.delete("/tag/:id", tagController.deleteTag);
-router.post(
-    "/tag/create",
-    reqbodyValidateData(tagIdSchema, tagCreateRegistrationSchema),
-    tagController.createTag
-);
-router.put(
-    "/tag/put/:id",
-    reqbodyValidateData(tagIdSchema, tagUpdateRegistrationSchema), //bodyValidateData(tagUpdateRegistrationSchema),
-    tagController.changeTag
-);
-
+router.post("/tag/create", reqbodyValidateData(tagIdSchema,tagCreateRegistrationSchema),tagController.createTag);
+router.put("/tag/put/:id",reqbodyValidateData(tagIdSchema, tagUpdateRegistrationSchema),tagController.changeTag);
 router.get("/workspace/one/:id", workspaceController.fetchOneWorkspace);
 router.get("/workspace/all/", workspaceController.fetchWorkspaces);
 router.delete("/workspace/:id", workspaceController.deleteWorkspace);
-router.post(
-    "/workspace",
-    bodyValidateData(workspaceCreateRegistrationSchema),
-    workspaceController.createWorkspace
-);
-router.put(
-    "/workspace/put/:id",
-    reqbodyValidateData(workspaceIdSchema, workspaceUpdateRegistrationSchema),
-    workspaceController.changeWorkspace
-);
-
+router.post("/workspace",bodyValidateData(workspaceCreateRegistrationSchema),workspaceController.createWorkspace);
+router.put("/workspace/put/:id",reqbodyValidateData(workspaceIdSchema, workspaceUpdateRegistrationSchema),workspaceController.changeWorkspace);
 router.get("/display/one/:id", displayController.fetchOneDisplay);
 router.get("/display/all", displayController.fetchDisplays);
-router.post(
-    "/display",
-    bodyValidateData(displayCreateRegistrationSchema),
-    displayController.createDisplay
-);
+router.post("/display",bodyValidateData(displayCreateRegistrationSchema),displayController.createDisplay);
 router.delete("/display/:id", displayController.deleteDisplay);
 
 router.use([morganLog, apiErrorValidation]);

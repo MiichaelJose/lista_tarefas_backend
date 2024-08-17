@@ -50,7 +50,7 @@ class TaskRepository {
             throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
         }
 
-        return await Task.deleteOne({ _id: id });
+        return await Task.findOneAndDelete({ _id: id });
     }
 }
 
