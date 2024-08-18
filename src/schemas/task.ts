@@ -7,7 +7,7 @@ const taskSchema = new mongoose.Schema({
         default: () => uuidv4()
     },
     displayId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: "displays",
         required: true
     },

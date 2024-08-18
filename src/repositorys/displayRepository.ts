@@ -5,10 +5,6 @@ import { ApiError } from "../libs/apiError.ts";
 
 class DisplayRepository {
     public async fetchOneDisplay(id: string) {
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
-        }
-
         return await DisplaySchema.findById(id);
     }
 
@@ -42,10 +38,6 @@ class DisplayRepository {
     }
 
     public async updateDisplay(id: string, body: any) {
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
-        }
-
         return await DisplaySchema.findOneAndUpdate(
             { _id: id },
             {
@@ -56,10 +48,6 @@ class DisplayRepository {
     }
 
     public async deleteDisplay(id: string) {
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
-        }
-
         return await DisplaySchema.findOneAndDelete({ _id: id });
     }
 }

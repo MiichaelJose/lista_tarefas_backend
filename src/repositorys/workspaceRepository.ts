@@ -4,10 +4,6 @@ import Workspace from "../schemas/workspace";
 
 class WorkspaceRepository {
     public async fetchWorkspace(id: string) { 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
-        }
-
         const workspace = await Workspace.findById(id)
 
         return workspace;
@@ -23,11 +19,6 @@ class WorkspaceRepository {
     }
 
     public async updateWorkspace(id: string, body: any) {
-        //alternativa { $set:boy }, { new: true, runValidators: true }
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
-        }
-        
         return await Workspace.findOneAndUpdate(
             { _id: id },
             {
@@ -38,10 +29,6 @@ class WorkspaceRepository {
     }
 
     public async deleteWorkspace(id: string) {
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new ApiError(404, 'Id not valid', 'Não foi possível encontrar esta workspace', { id: id });
-        }
-
         return await Workspace.findOneAndDelete({ _id: id });
     }
 }

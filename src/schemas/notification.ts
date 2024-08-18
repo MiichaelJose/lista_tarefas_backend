@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
+import { v4 as uuidv4 } from 'uuid';
 
 const notificationSchema = new mongoose.Schema({
+    _id: {
+        type: String,
+        default: () => uuidv4()
+    },
     type: { type: String, default: "warn" },
     status: { type: String, require: true },
     downtime: { type: Number, default: 7 },

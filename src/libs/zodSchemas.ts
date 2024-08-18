@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const workspaceIdSchema = z.object({
-    id: z.string()
+    id: z.string().uuid()
 });
 
 export const workspaceCreateRegistrationSchema = z.object({
@@ -32,12 +32,12 @@ export const tagUpdateRegistrationSchema = z.object({
 });
 
 export const taskCreateRegistrationSchema = z.object({
-    displayId: z.string(),
+    displayId: z.string().uuid(),
     title: z.string().max(100),
     description: z.string().max(255),
     people_task: z.array(
         z.object({
-            _id: z.string(),
+            _id: z.string().uuid(),
             name: z.string()
         })
     ).optional(),
@@ -47,12 +47,12 @@ export const taskCreateRegistrationSchema = z.object({
 });
 
 export const taskUpdateRegistrationSchema = z.object({
-    displayId: z.string(),
+    displayId: z.string().uuid(),
     title: z.string().max(100),
     description: z.string().max(255),
     people_task: z.array(
         z.object({
-            _id: z.string(),
+            _id: z.string().uuid(),
             name: z.string()
         })
     ),
@@ -63,8 +63,8 @@ export const taskUpdateRegistrationSchema = z.object({
 
 export const displayCreateRegistrationSchema = z.object({
     type: z.string().optional(),
-    workspaceId: z.string(),
-    tagId: z.string(),
+    workspaceId: z.string().uuid(),
+    tagId: z.string().uuid(),
     journeys: z.array(z.object({
         name: z.string()
     })).optional()
