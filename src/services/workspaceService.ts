@@ -18,6 +18,16 @@ class WorkspaceService {
         return workspace;
     }
 
+    public async fetchUserIdWorkspaces(id: string) {
+        const workspace = await this.workspaceRepository.fetchUserIdWorkspaces(id);
+
+        if (!workspace.length) {
+            throw new ApiError(404, 'Workspace not found', 'Não foi possível encontrar esta workspace', { id: id });
+        }
+
+        return workspace;
+    }
+
     public async fetchAllWorkspace() {
         const workspaces = await this.workspaceRepository.fetchAllWorkspace();
         

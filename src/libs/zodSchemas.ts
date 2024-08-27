@@ -5,13 +5,15 @@ export const workspaceIdSchema = z.object({
 });
 
 export const workspaceCreateRegistrationSchema = z.object({
-    name: z.string()
+    userId: z.string().uuid(),
+    name: z.string().max(10),
+    image: z.string()
 });
 
 export const workspaceUpdateRegistrationSchema = z.object({
-    name: z.string()
+    name: z.string().max(10),
+    image: z.string()
 });
-
 
 export const tagIdSchema = z.object({
     id: z.string().uuid(),   // Valida se o parâmetro 'id' é um UUID válido

@@ -2,8 +2,8 @@ import express from "express";
 import router from "./routes";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import cors from 'cors';
 import "dotenv/config";
-import morgan from "morgan";
 
 //https://github.com/RobinTail/express-zod-api?tab=readme-ov-file
 //https://github.com/RobinTail/express-zod-api?tab=readme-ov-file#cross-origin-resource-sharing
@@ -46,6 +46,7 @@ const app = express();
 
 const ENV: any = process.env;
 
+app.use(cors());
 app.use(bodyParser.json());
 
 mongoose

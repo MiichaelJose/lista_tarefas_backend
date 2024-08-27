@@ -42,6 +42,7 @@ router.delete("/tag/:id", tagController.deleteTag);
 router.post("/tag/create", bodyValidateData(tagCreateRegistrationSchema),tagController.createTag);
 router.put("/tag/put/:id",reqbodyValidateData(tagIdSchema, tagUpdateRegistrationSchema),tagController.changeTag);
 router.get("/workspace/one/:id", workspaceController.fetchOneWorkspace);
+router.get("/workspace/userid/:id", reqValidateData(workspaceIdSchema), workspaceController.fetchUserIdWorkspaces);
 router.get("/workspace/all/", workspaceController.fetchWorkspaces);
 router.delete("/workspace/:id", workspaceController.deleteWorkspace);
 router.post("/workspace",bodyValidateData(workspaceCreateRegistrationSchema),workspaceController.createWorkspace);

@@ -13,6 +13,17 @@ class WorkspaceController {
         }
     }
 
+    public async fetchUserIdWorkspaces(req: Request, res: Response, next: NextFunction) {
+        try {
+            const workspaces = await new WorkspaceService().fetchUserIdWorkspaces(
+                req.params.id
+            );
+            res.status(200).json(workspaces);
+        } catch (error) {
+            next(error)
+        }
+    }
+
     public async fetchWorkspaces(req: Request, res: Response, next: NextFunction) {
         try {
             const workspaces = await new WorkspaceService().fetchAllWorkspace();

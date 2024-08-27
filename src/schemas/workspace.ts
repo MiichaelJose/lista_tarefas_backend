@@ -6,6 +6,7 @@ const workspaceSchema = new mongoose.Schema({
         type: String,
         default: () => uuidv4()
     },
+    userId: { type: String, required: true },
     name: { type: String, required: true },
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now }

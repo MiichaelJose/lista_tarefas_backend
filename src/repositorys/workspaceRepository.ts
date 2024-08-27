@@ -9,6 +9,10 @@ class WorkspaceRepository {
         return workspace;
     }
 
+    public async fetchUserIdWorkspaces(id: string) { 
+        return await Workspace.find({ userId: id}).exec();
+    }
+
     public async fetchAllWorkspace() {
         return await Workspace.find();
     }
