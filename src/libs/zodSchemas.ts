@@ -7,12 +7,12 @@ export const workspaceIdSchema = z.object({
 export const workspaceCreateRegistrationSchema = z.object({
     userId: z.string().uuid(),
     name: z.string().max(10),
-    image: z.string()
+    image: z.string().optional()
 });
 
 export const workspaceUpdateRegistrationSchema = z.object({
     name: z.string().max(10),
-    image: z.string()
+    image: z.string().optional()
 });
 
 export const tagIdSchema = z.object({
