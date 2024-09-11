@@ -18,6 +18,16 @@ class DisplayService {
         return display;
     }
 
+    public async fetchWorkspaceIdDisplay(id: string) {
+        const display = await this.displayRepository.fetchWorkspaceIdDisplay(id);
+
+        if (!display.length) {
+            throw new ApiError(404, 'Workspace not found', 'Não foi possível encontrar esta workspace', { id: id });
+        }
+
+        return display;
+    }
+
     public async fetchAllDisplays() {
         const displays = await this.displayRepository.fetchAllDisplays();
 

@@ -4,9 +4,20 @@ import DisplayService from "../services/displayService";
 class DisplayController {
     public async fetchOneDisplay(req: Request, res: Response, next: NextFunction) {
         try {
-            const tag = await new DisplayService().fetchOneDisplay(req.params.id);
+            const display = await new DisplayService().fetchOneDisplay(req.params.id);
 
-            res.status(200).json(tag);
+            res.status(200).json(display);
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    public async fetchWorkspaceIdDisplay(req: Request, res: Response, next: NextFunction) {
+        try {
+            const displays = await new DisplayService().fetchWorkspaceIdDisplay(
+                req.params.id
+            );
+            res.status(200).json(displays);
         } catch (error) {
             next(error)
         }
@@ -14,9 +25,9 @@ class DisplayController {
 
     public async fetchDisplays(req: Request, res: Response, next: NextFunction) {
         try {
-            const tags = await new DisplayService().fetchAllDisplays();
+            const displays = await new DisplayService().fetchAllDisplays();
 
-            res.status(200).json(tags);
+            res.status(200).json(displays);
         } catch (error) {
             next(error)
         }
@@ -26,8 +37,8 @@ class DisplayController {
         try {
             const body = req.body;
 
-            const tag = await new DisplayService().createDisplay(body);
-            res.status(200).json(tag);
+            const display = await new DisplayService().createDisplay(body);
+            res.status(200).json(display);
         } catch (error) {
             next(error)
         }
@@ -35,11 +46,11 @@ class DisplayController {
 
     public async changeDisplay(req: Request, res: Response, next: NextFunction) {
         try {
-            const tag = await new DisplayService().updateDisplay(
+            const display = await new DisplayService().updateDisplay(
                 req.params.id,
                 req.body
             );
-            res.status(200).json(tag);
+            res.status(200).json(display);
         } catch (error) {
             next(error)
         }
@@ -47,8 +58,8 @@ class DisplayController {
 
     public async deleteDisplay(req: Request, res: Response, next: NextFunction) {
         try {
-            const tag = await new DisplayService().deleteDisplay(req.params.id);
-            res.status(200).json(tag);
+            const display = await new DisplayService().deleteDisplay(req.params.id);
+            res.status(200).json(display);
         } catch (error) {
             next(error)
         }

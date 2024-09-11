@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const workspaceIdSchema = z.object({
-    id: z.string().uuid()
+    userId: z.string().uuid()
 });
 
 export const workspaceCreateRegistrationSchema = z.object({
@@ -61,6 +61,10 @@ export const taskUpdateRegistrationSchema = z.object({
     status: z.string().optional(),
     initial_at: z.string().datetime({ offset: true }),
     ended_at: z.date().optional()
+});
+
+export const displayIdSchema = z.object({
+    id: z.string().uuid()
 });
 
 export const displayCreateRegistrationSchema = z.object({

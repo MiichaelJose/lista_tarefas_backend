@@ -14,7 +14,8 @@ import {
     workspaceCreateRegistrationSchema,
     workspaceUpdateRegistrationSchema,
     workspaceIdSchema,
-    tagIdSchema
+    tagIdSchema,
+    displayIdSchema
 } from "../libs/zodSchemas";
 
 import morganLog from "../middlewares/morganLog";
@@ -42,12 +43,13 @@ router.delete("/tag/:id", tagController.deleteTag);
 router.post("/tag/create", bodyValidateData(tagCreateRegistrationSchema),tagController.createTag);
 router.put("/tag/put/:id",reqbodyValidateData(tagIdSchema, tagUpdateRegistrationSchema),tagController.changeTag);
 router.get("/workspace/one/:id", workspaceController.fetchOneWorkspace);
-router.get("/workspace/userid/:id", reqValidateData(workspaceIdSchema), workspaceController.fetchUserIdWorkspaces);
+router.get("/workspace/userId/:userId", reqValidateData(workspaceIdSchema), workspaceController.fetchUserIdWorkspaces);
 router.get("/workspace/all/", workspaceController.fetchWorkspaces);
 router.delete("/workspace/:id", workspaceController.deleteWorkspace);
 router.post("/workspace",bodyValidateData(workspaceCreateRegistrationSchema),workspaceController.createWorkspace);
 router.put("/workspace/put/:id",reqbodyValidateData(workspaceIdSchema, workspaceUpdateRegistrationSchema),workspaceController.changeWorkspace);
 router.get("/display/one/:id", displayController.fetchOneDisplay);
+router.get("/display/workspaceid/:id", reqValidateData(displayIdSchema), displayController.fetchWorkspaceIdDisplay);
 router.get("/display/all", displayController.fetchDisplays);
 router.post("/display/create",bodyValidateData(displayCreateRegistrationSchema),displayController.createDisplay);
 router.delete("/display/:id", displayController.deleteDisplay);

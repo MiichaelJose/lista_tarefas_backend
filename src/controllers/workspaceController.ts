@@ -14,10 +14,11 @@ class WorkspaceController {
     }
 
     public async fetchUserIdWorkspaces(req: Request, res: Response, next: NextFunction) {
+        const { userId } = req.params
         try {
-            const workspaces = await new WorkspaceService().fetchUserIdWorkspaces(
-                req.params.id
-            );
+            const workspaces = await new WorkspaceService()
+                .fetchUserIdWorkspaces(userId);
+
             res.status(200).json(workspaces);
         } catch (error) {
             next(error)

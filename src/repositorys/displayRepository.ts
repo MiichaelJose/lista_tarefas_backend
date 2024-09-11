@@ -8,6 +8,11 @@ class DisplayRepository {
         return await DisplaySchema.findById(id);
     }
 
+    
+    public async fetchWorkspaceIdDisplay(id: string) { 
+        return await DisplaySchema.find({ workspaceId: id}).exec();
+    }
+
     public async fetchAllDisplays() {
         return await DisplaySchema.find().populate([
             { path: "journeys", select: ["name"] },  
