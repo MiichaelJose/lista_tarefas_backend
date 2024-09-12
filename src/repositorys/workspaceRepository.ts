@@ -3,26 +3,24 @@ import { ApiError } from "../libs/apiError";
 import Workspace from "../schemas/workspace";
 
 class WorkspaceRepository {
-    public async fetchWorkspace(id: string) { 
+    public async fetch(id: string) {
+        console.log(id);
+         
         const workspace = await Workspace.findById(id)
 
         return workspace;
     }
 
-    public async fetchUserIdWorkspaces(id: string) { 
-        return await Workspace.find({ userId: id}).exec();
-    }
-
-    public async fetchAllWorkspace() {
+    public async fetchAll() {
         return await Workspace.find();
     }
 
-    public async createWorkspace(body: any) {
+    public async create(body: any) {
         const workspace = new Workspace(body);
         return await workspace.save();
     }
 
-    public async updateWorkspace(id: string, body: any) {
+    public async update(id: string, body: any) {
         return await Workspace.findOneAndUpdate(
             { _id: id },
             {
@@ -32,8 +30,12 @@ class WorkspaceRepository {
         );
     }
 
-    public async deleteWorkspace(id: string) {
+    public async delete(id: string) {
         return await Workspace.findOneAndDelete({ _id: id });
+    }
+
+    public async fetchWorkspaceByUserId(id: string) { 
+        return await Workspace.find({ userId: id}).exec();
     }
 }
 

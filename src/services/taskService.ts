@@ -10,7 +10,7 @@ class TaskService {
     }
 
     public async fetchOneTask(id: string) {
-        const task = await this.taskRepository.fetchOneTask(id);
+        const task = await this.taskRepository.fetch(id);
 
         if (!task) {
             throw new ApiError(404, 'Task not found', 'Não foi possível encontrar esta task', { id: id });
@@ -20,7 +20,7 @@ class TaskService {
     }
 
     public async fetchOneTaskWithDisplay(id: string) {
-        const task = await this.taskRepository.fetchOneTaskWithDisplay(id);
+        const task = await this.taskRepository.fetchTaskAndWorkspaceById(id);
 
         if (!task) {
             throw new ApiError(404, 'Task with display not found', 'Não foi possível encontrar esta task', { id: id });
@@ -30,7 +30,7 @@ class TaskService {
     }
 
     public async fetchAllTasks() {
-        const tasks = await this.taskRepository.fetchAllTasks();
+        const tasks = await this.taskRepository.fetchAll();
 
         if(!tasks.length) {
             throw new ApiError(404, 'Tasks not found', 'Não foi possível encontrar Tasks');
@@ -47,11 +47,11 @@ class TaskService {
             throw new ApiError(404, 'Data not found', 'A data inicial deve ser maior que a data atual.', { datainitial: dateInitial });
         }
 
-        return await this.taskRepository.createTask(body);
+        return await this.taskRepository.create(body);
     }
 
     public async updateTask(id: string, body: any) {
-        const task = await this.taskRepository.updateTask(id, body);
+        const task = await this.taskRepository.update(id, body);
 
         if (!task) {
             throw new ApiError(404, 'Task not found', 'Não foi possível encontrar esta task', { id: id });
@@ -60,7 +60,7 @@ class TaskService {
     }
 
     public async deleteTask(id: string) {
-        const task = await this.taskRepository.deleteTask(id);
+        const task = await this.taskRepository.delete(id);
 
         if (!task) {
             throw new ApiError(404, 'Task not found', 'Não foi possível encontrar esta task', { id: id });

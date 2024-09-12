@@ -9,7 +9,7 @@ class TagService {
     }
 
     public async fetchOneTag(id: string) {
-        const tag = await this.tagRepository.fetchOneTag(id);
+        const tag = await this.tagRepository.fetch(id);
 
         if (!tag) {
             throw new ApiError(404, 'Tag not found', 'Não foi possível encontrar esta tag', { id: id });
@@ -19,7 +19,7 @@ class TagService {
     }
 
     public async fetchAllTags() {
-        const tags = await this.tagRepository.fetchAllTags();
+        const tags = await this.tagRepository.fetchAll();
 
         if (!tags.length) {
             throw new ApiError(404, 'Tags not found', 'Não foi possível encontrar Tags', {});
@@ -29,11 +29,11 @@ class TagService {
     }
 
     public async createTag(body: any) {
-        return await this.tagRepository.createTag(body);
+        return await this.tagRepository.create(body);
     }
 
     public async updateTag(id: string, body: any) {
-        const tag = await this.tagRepository.updateTag(id, body);
+        const tag = await this.tagRepository.update(id, body);
 
         if (!tag) {
             throw new ApiError(404, 'Tag not found', 'Não foi possível encontrar esta Tag', { id: id });
@@ -43,7 +43,7 @@ class TagService {
     }
 
     public async deleteTag(id: string) {
-        const tag = await this.tagRepository.deleteTag(id);
+        const tag = await this.tagRepository.delete(id);
 
         if (!tag) {
             throw new ApiError(404, 'Tag not found', 'Não foi possível encontrar esta Tag', { id: id });

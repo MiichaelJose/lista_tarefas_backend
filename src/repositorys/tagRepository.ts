@@ -3,15 +3,15 @@ import TagSchema from "../schemas/tag.ts";
 import { ApiError } from "../libs/apiError.ts";
 
 class TagRepository {
-    public async fetchOneTag(id: string) {
+    public async fetch(id: string) {
         return await TagSchema.findById(id);
     }
 
-    public async fetchAllTags() {
+    public async fetchAll() {
         return await TagSchema.find();
     }
 
-    public async createTag(body: any) {
+    public async create(body: any) {
         try {
             const otag = new TagSchema(body);
             return await otag.save();
@@ -20,7 +20,7 @@ class TagRepository {
         }
     }
 
-    public async updateTag(id: string, body: any) {
+    public async update(id: string, body: any) {
         return await TagSchema.findOneAndUpdate(
             { _id: id },
             {
@@ -33,7 +33,7 @@ class TagRepository {
         );
     }
 
-    public async deleteTag(id: string) {
+    public async delete(id: string) {
         return await TagSchema.findOneAndDelete({ _id: id });
     }
 }

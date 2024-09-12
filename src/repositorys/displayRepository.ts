@@ -1,26 +1,19 @@
-import mongoose from "mongoose";
 import DisplaySchema from "../schemas/display.ts";
 import Journey from "../schemas/journeys.ts";
-import { ApiError } from "../libs/apiError.ts";
 
 class DisplayRepository {
-    public async fetchOneDisplay(id: string) {
+    public async fetch(id: string) {
         return await DisplaySchema.findById(id);
     }
 
-    
-    public async fetchWorkspaceIdDisplay(id: string) { 
-        return await DisplaySchema.find({ workspaceId: id}).exec();
-    }
-
-    public async fetchAllDisplays() {
+    public async fetchAll() {
         return await DisplaySchema.find().populate([
             { path: "journeys", select: ["name"] },  
             { path: "tagId", select: ["name"] }
         ]).exec();
     }
 
-    public async createDisplay(body: any) {
+    public async create(body: any) {
         try {
             const existingDisplaysCount = await DisplaySchema.countDocuments({ workspaceId: body.workspaceId });
             
@@ -42,7 +35,7 @@ class DisplayRepository {
         }
     }
 
-    public async updateDisplay(id: string, body: any) {
+    public async update(id: string, body: any) {
         return await DisplaySchema.findOneAndUpdate(
             { _id: id },
             {
@@ -52,8 +45,12 @@ class DisplayRepository {
         );
     }
 
-    public async deleteDisplay(id: string) {
+    public async delete(id: string) {
         return await DisplaySchema.findOneAndDelete({ _id: id });
+    }
+
+    public async fetchWorkspaceIdDisplay(id: string) { 
+        return await DisplaySchema.find({ workspaceId: id}).exec();
     }
 }
 

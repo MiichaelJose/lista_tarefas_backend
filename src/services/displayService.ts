@@ -9,7 +9,7 @@ class DisplayService {
     }
 
     public async fetchOneDisplay(id: string) {
-        const display = await this.displayRepository.fetchOneDisplay(id);
+        const display = await this.displayRepository.fetch(id);
 
         if (!display) {
             throw new ApiError(404, 'Display not found', 'Não foi possível encontrar esse display', { id: id });
@@ -29,7 +29,7 @@ class DisplayService {
     }
 
     public async fetchAllDisplays() {
-        const displays = await this.displayRepository.fetchAllDisplays();
+        const displays = await this.displayRepository.fetchAll();
 
         if (!displays.length) {
             throw new ApiError(404, 'Display not found', 'Não foi possível encontrar Displays', {});
@@ -39,11 +39,11 @@ class DisplayService {
     }
 
     public async createDisplay(body: any) {
-        return await this.displayRepository.createDisplay(body);
+        return await this.displayRepository.create(body);
     }
 
     public async updateDisplay(id: string, body: any) {
-        const display = await this.displayRepository.updateDisplay(id, body);
+        const display = await this.displayRepository.update(id, body);
 
         if (!display) {
             throw new ApiError(404, 'Display not found', 'Não foi possível encontrar este Display', { id: id });
@@ -53,7 +53,7 @@ class DisplayService {
     }
 
     public async deleteDisplay(id: string) {
-        const display = await this.displayRepository.deleteDisplay(id);
+        const display = await this.displayRepository.delete(id);
 
         if (!display) {
             throw new ApiError(404, 'Display not found', 'Não foi possível encontrar este Display', { id: id });
